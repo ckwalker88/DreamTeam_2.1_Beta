@@ -12,6 +12,7 @@ using BucBoard.Data;
 using BucBoard.Models;
 using BucBoard.Services;
 using Microsoft.Extensions.Logging;
+using BucBoard.Services.Interfaces;
 
 namespace BucBoard
 {
@@ -39,8 +40,8 @@ namespace BucBoard
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
-
             services.AddSingleton<Initializer>();
+            services.AddScoped<IAuthenticationRepository, DbAuthenticationRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
