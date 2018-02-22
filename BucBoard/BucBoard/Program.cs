@@ -14,25 +14,9 @@ namespace BucBoard
 {
     public class Program
     {
-        //public static void Main(string[] args)
-        //{
-        //    BuildWebHost(args).Run();
-        //}
-
-        //public static IWebHost BuildWebHost(string[] args) =>
-        //    WebHost.CreateDefaultBuilder(args)
-        //        .UseStartup<Startup>()
-        //        .Build();
-
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .UseApplicationInsights()
-                .Build();
+            var host = BuildWebHost(args);
 
             using (var scope = host.Services.CreateScope())
             {
@@ -45,12 +29,22 @@ namespace BucBoard
                 catch (Exception)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError("An error occurred while seeding the database.");
+                    logger.LogError("An error occured while seeding the database.");
                 }
             }
 
-            host.Run();
+             BuildWebHost(args).Run();
         }
+
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
+                .UseKestrel()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseIISIntegration()
+                .UseStartup<Startup>()
+                .UseApplicationInsights()
+                .Build();
+
 
     }
 }
