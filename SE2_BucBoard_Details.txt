@@ -1,0 +1,21 @@
+SE2 Project Details 
+
+Server Name = bucboard
+
+Server login username = bucboard18
+			 password = bucboard18!
+
+Database Name = BucBoardDB
+
+Resource Group = BucBoardResourceGroup
+
+SQL Server Name = bucboard.database.windows.net
+
+SQL Server Admin Login Username = bucboard18
+					   Password = FyoCouch!
+				   
+Database Server Location = eastus
+
+				   
+				   
+				   
