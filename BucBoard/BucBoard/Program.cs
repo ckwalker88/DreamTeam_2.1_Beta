@@ -33,7 +33,8 @@ namespace BucBoard
                 }
             }
 
-             BuildWebHost(args).Run();
+             //BuildWebHost(args).Run();
+             host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
