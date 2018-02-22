@@ -28,7 +28,7 @@ namespace BucBoard
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AuthenticationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("BucBoardConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AuthenticationDbContext>()
