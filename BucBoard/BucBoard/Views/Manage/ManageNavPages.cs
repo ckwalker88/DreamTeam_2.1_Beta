@@ -13,6 +13,8 @@ namespace BucBoard.Views.Manage
 
         public static string Index => "Index";
 
+        public static string Announcements => "Announcements";
+
         public static string ChangePassword => "ChangePassword";
 
         public static string ExternalLogins => "ExternalLogins";
@@ -20,6 +22,8 @@ namespace BucBoard.Views.Manage
         public static string TwoFactorAuthentication => "TwoFactorAuthentication";
 
         public static string IndexNavClass(ViewContext viewContext) => PageNavClass(viewContext, Index);
+
+        public static string AnnouncementsNavClass(ViewContext viewContext) => PageNavClass(viewContext, Announcements);
 
         public static string ChangePasswordNavClass(ViewContext viewContext) => PageNavClass(viewContext, ChangePassword);
 
