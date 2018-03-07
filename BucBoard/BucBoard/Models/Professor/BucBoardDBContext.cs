@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace BucBoard.Models.Entities.Existing
+namespace BucBoard.Models.Professor
 {
     public partial class BucBoardDBContext : DbContext
     {
@@ -20,7 +20,7 @@ namespace BucBoard.Models.Entities.Existing
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+       
                 optionsBuilder.UseSqlServer(@"Data Source=bucboard.database.windows.net;Initial Catalog=BucBoardDB;Integrated Security=False;User ID=bucboard18;Password=FyoCouch!;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
@@ -39,7 +39,17 @@ namespace BucBoard.Models.Entities.Existing
                     .IsRequired()
                     .IsUnicode(false);
 
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Headline)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 

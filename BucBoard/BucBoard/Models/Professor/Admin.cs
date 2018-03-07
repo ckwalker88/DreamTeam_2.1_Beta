@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BucBoard.Models.Entities.Existing
+namespace BucBoard.Models.Professor
 {
     public partial class Admin
     {
@@ -12,5 +12,7 @@ namespace BucBoard.Models.Entities.Existing
         public string ClassSchedule { get; set; }
         public string Headline { get; set; }
         public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BucBoard.Models.Entities.Existing
+namespace BucBoard.Models.Professor
 {
     public partial class AspNetUsers
     {
