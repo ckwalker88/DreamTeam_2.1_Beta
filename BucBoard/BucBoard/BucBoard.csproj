@@ -23,7 +23,6 @@
   <ItemGroup>
     <Folder Include="Models\Entities\" />
     <Folder Include="Models\DbContexts\" />
-    <Folder Include="Models\ViewModels\" />
   </ItemGroup>
 
 </Project>
