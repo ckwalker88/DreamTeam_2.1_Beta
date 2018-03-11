@@ -4,6 +4,8 @@
     ViewData["Title"] = "Users";
 }
 
+<h2>@ViewData["Title"]</h2>
+
 <table class="table">
     <tr>
         <th>
@@ -12,9 +14,7 @@
         <th>
             @Html.DisplayNameFor(model => model.UserName)
         </th>
-        <th>
-            @Html.Raw("Number of Roles")
-        </th>
+
     </tr>
 
     @foreach (var item in Model)
@@ -26,13 +26,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
             </td>
-           
+
 
         </tr>
     }
 
 </table>
+
 <div>
-    @Html.ActionLink("Assign Roles", "assignroles")
+    <a asp-action="UserRoles">Back to List of Roles</a>
 </div>
 

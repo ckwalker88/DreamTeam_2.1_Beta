@@ -14,11 +14,13 @@ namespace BucBoard.Services
     {
         private AuthenticationDbContext _db;
         private RoleManager<IdentityRole> _roleManager;
+        private UserManager<ApplicationUser> _userManager;
 
-        public DbAuthenticationRepository(AuthenticationDbContext db, RoleManager<IdentityRole> roleManager)
+        public DbAuthenticationRepository(AuthenticationDbContext db, RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
         {
             _db = db;
             _roleManager = roleManager;
+            _userManager = userManager;
         }
 
         public IQueryable<IdentityRole> ReadAllRoles()
@@ -29,6 +31,10 @@ namespace BucBoard.Services
         public IQueryable<ApplicationUser> ReadAllUsers()
         {
             return _db.Users;
+         
         }
+
+
+
     }
 }

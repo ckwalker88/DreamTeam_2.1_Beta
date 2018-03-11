@@ -27,19 +27,5 @@ namespace BucBoard.Controllers
             return View(_roles.ReadAllRoles());
         }
 
-        //public IActionResult RoleListDetailed()
-        //{
-        //    //var role = _roleManager.Roles.First(r => r.Name == roleName);
-        //    //var count = _roleManager.Roles.Count(r => r.Id == )
-
-        //    var model = _roleManager.Roles.Select(r => new AppRoleListDetailedViewModel
-        //    {
-        //        RoleName = r.Name,
-        //        Id = r.Id,
-        //        Description = r.Name,
-        //        NumberOfUsers = _roleManager.Roles.Count()
-        //    });       
-                
-        //}
     }
 }

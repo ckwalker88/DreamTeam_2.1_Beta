@@ -1,4 +1,6 @@
-﻿using BucBoard.Models;
+﻿
+using BucBoard.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ namespace BucBoard.Services.Interfaces
     {
         IQueryable<IdentityRole> ReadAllRoles();
         IQueryable<ApplicationUser> ReadAllUsers();
+        //IList<ApplicationUser> GetAppUsersInRole(string roleName);
         
 
     }
