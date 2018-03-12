@@ -15,7 +15,7 @@ namespace BucBoard.Models
         public DateTime? LastLogin { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string ClassShedule { get; set; }
+        public string ClassSchedule { get; set; }
         public string HeadLine { get; set; }
         public byte[] ProfilePicture { get; set; }
 
