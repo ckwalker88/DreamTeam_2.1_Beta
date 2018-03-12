@@ -22,7 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\ViewModels\" />
+    <Folder Include="Models\Entities\" />
   </ItemGroup>
 
 </Project>

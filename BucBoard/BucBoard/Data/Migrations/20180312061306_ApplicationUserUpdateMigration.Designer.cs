@@ -11,9 +11,10 @@ using System;
 namespace BucBoard.Data.Migrations
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180312061306_ApplicationUserUpdateMigration")]
+    partial class ApplicationUserUpdateMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -37,15 +38,13 @@ namespace BucBoard.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("FirstName")
-                        .IsRequired();
+                    b.Property<string>("FirstName");
 
                     b.Property<string>("HeadLine");
 
                     b.Property<DateTime?>("LastLogin");
 
-                    b.Property<string>("LastName")
-                        .IsRequired();
+                    b.Property<string>("LastName");
 
                     b.Property<bool>("LockoutEnabled");
 

@@ -13,7 +13,8 @@ namespace BucBoard.Services.Interfaces
     {
         IQueryable<IdentityRole> ReadAllRoles();
         IQueryable<ApplicationUser> ReadAllUsers();
-        //IList<ApplicationUser> GetAppUsersInRole(string roleName);
+        //ApplicationUser Read(string id);
+        
         
 
     }

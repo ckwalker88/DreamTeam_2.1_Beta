@@ -1,21 +1,21 @@
-﻿@model IEnumerable<IdentityRole>
+﻿@model IEnumerable<ApplicationUser>
 @{
-    ViewData["Title"] = "Roles";
+    ViewData["Title"] = "Select a User to Delete";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<p>Choose a role below to display a list of users in the current role</p>
+<p>Choose a user below to delete. Remember that deletion is permanent!</p>
 
-<form asp-action="UsersInSelectedRole" method="post" role="form">
+<form asp-action="DeleteUser" method="post" role="form">
     <div class="form-horizontal">
         <div class="form-group">
-            <label for="Name" class="control-label col-md-2">Select a Role:</label>
+            <label for="User" class="control-label col-md-2">Select a User:</label>
             <div class="col-md-10">
-                <select name="roleName" id="roleName" class="form-control">
-                    @foreach (var role in Model)
+                <select name="user" id="user" class="form-control">
+                    @foreach (var user in Model)
                     {
-                        <option value="@role.Name">@role.Name</option>
+                        <option value="@user.Id">@user.FirstName @user.LastName</option>
                     }
                 </select>
             </div>
@@ -31,6 +31,4 @@
 <div>
     <a asp-action="Index">Back to List of Users</a>
 </div>
-
-
 

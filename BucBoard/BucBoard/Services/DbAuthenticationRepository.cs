@@ -23,6 +23,13 @@ namespace BucBoard.Services
             _userManager = userManager;
         }
 
+        //public async ApplicationUser Read(string id)
+        //{
+        //    var appUser = await _userManager.FindByIdAsync(id);
+
+        //    return appUser;
+        //}
+
         public IQueryable<IdentityRole> ReadAllRoles()
         {
             return _db.Roles;
@@ -30,7 +37,7 @@ namespace BucBoard.Services
 
         public IQueryable<ApplicationUser> ReadAllUsers()
         {
-            return _db.Users;
+            return _db.Users.Include(r => r.Roles);
          
         }
 

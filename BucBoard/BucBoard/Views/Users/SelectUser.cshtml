@@ -1,0 +1,34 @@
+﻿@model IEnumerable<ApplicationUser>
+    @{
+        ViewData["Title"] = "Select User";
+    }
+
+    <h2>@ViewData["Title"]</h2>
+
+    <p>Choose a user below </p>
+
+    <form asp-action="DeleteUser" method="post" role="form">
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label for="User" class="control-label col-md-2">Select a User:</label>
+                <div class="col-md-10">
+                    <select name="user" id="user" class="form-control">
+                        @foreach (var user in Model)
+                    {
+                        <option value="@user.Id">@user.FirstName @user.LastName</option>
+                }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Select" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <div>
+        <a asp-action="Index">Back to List of Users</a>
+    </div>
+
