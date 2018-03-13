@@ -13,6 +13,9 @@ using Microsoft.Extensions.Options;
 using BucBoard.Models;
 using BucBoard.Models.AccountViewModels;
 using BucBoard.Services;
+using System.Data.SqlClient;
+
+
 
 namespace BucBoard.Controllers
 {
@@ -24,17 +27,22 @@ namespace BucBoard.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        //Added below
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            //added below
+            _roleManager = roleManager;
         }
 
         [TempData]
@@ -220,11 +228,37 @@ namespace BucBoard.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
+
+                    //Add a user to the default role, or any role we specify 
+                    await _userManager.AddToRoleAsync(user, "Admin");
+
+                    //Add the role "Admin" Id to the RolesId column in the AspNetUsers table 
+                    string role = "c2181b3b-f186-4439-bbba-9a0a68585791";
+                    
+                    //Get the users id for the query below
+                    string Id = await _userManager.GetUserIdAsync(user);
+
+                    using (SqlConnection conn = new SqlConnection())
+                    {
+                        conn.ConnectionString = "Data Source=bucboard.database.windows.net;Initial Catalog=BucBoardDB;Integrated Security=False;User ID=bucboard18;Password=FyoCouch!;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+                        conn.Open();
+
+                        SqlCommand myUpdateCommand = new SqlCommand("UPDATE dbo.AspNetUsers SET RolesId = @role  WHERE Id =  @Id", conn);
+
+                        myUpdateCommand.Parameters.AddWithValue("@role", role);
+                        myUpdateCommand.Parameters.AddWithValue("@Id", Id);
+
+                        myUpdateCommand.ExecuteNonQuery();
+
+                        conn.Close();
+                        conn.Dispose();
+
+                    }
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);

@@ -40,7 +40,7 @@ namespace BucBoard
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
-            services.AddSingleton<Initializer>();
+            
             services.AddScoped<IAuthenticationRepository, DbAuthenticationRepository>();
         }
 

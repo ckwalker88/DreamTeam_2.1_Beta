@@ -11,9 +11,10 @@ using System;
 namespace BucBoard.Data.Migrations
 {
     [DbContext(typeof(AuthenticationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180312065404_ApplicationUserUpdateMigration02")]
+    partial class ApplicationUserUpdateMigration02
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
