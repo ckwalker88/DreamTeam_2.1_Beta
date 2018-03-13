@@ -16,7 +16,7 @@ namespace BucBoard.Controllers
             _roleManager = roleManager;
         }
 
-        [Authorize(Roles="Admin")]
+        [Authorize(Roles="SuperAdmin")]
         public IActionResult Index()
         {
             return View(_roles.ReadAllRoles());

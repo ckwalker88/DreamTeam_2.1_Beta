@@ -237,45 +237,28 @@ namespace BucBoard.Controllers
                     //Add a user to the default role, or any role we specify 
                     await _userManager.AddToRoleAsync(user, "Admin");
 
-                    //Add the role "Member" Id to the RolesId column in the AspNetUsers table 
-                    string role = "c2181b3b - f186 - 4439 - bbba - 9a0a68585791";
-                    //var roleType = await _roleManager.FindByIdAsync(role);
-                    //var roleId = await _roleManager.GetRoleIdAsync(roleType);
-
+                    //Add the role "Admin" Id to the RolesId column in the AspNetUsers table 
+                    string role = "c2181b3b-f186-4439-bbba-9a0a68585791";
+                    
+                    //Get the users id for the query below
                     string Id = await _userManager.GetUserIdAsync(user);
-
-
-                    //string query = "UPDATE dbo.AspNetUsers SET R(RolesId) VALUES (@roleId)";
-                    //string query = "UPDATE dbo.AspNetUsers SET RolesId = " + roleId + " WHERE Id = " + Id;
 
                     using (SqlConnection conn = new SqlConnection())
                     {
                         conn.ConnectionString = "Data Source=bucboard.database.windows.net;Initial Catalog=BucBoardDB;Integrated Security=False;User ID=bucboard18;Password=FyoCouch!;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                         conn.Open();
 
-                        //SqlCommand myUpdateCommand = new SqlCommand(query, conn);
-                        SqlCommand myUpdateCommand = new SqlCommand("UPDATE dbo.AspNetUsers SET RolesId = " + role + " WHERE Id = " + Id, conn);
+                        SqlCommand myUpdateCommand = new SqlCommand("UPDATE dbo.AspNetUsers SET RolesId = @role  WHERE Id =  @Id", conn);
+
+                        myUpdateCommand.Parameters.AddWithValue("@role", role);
+                        myUpdateCommand.Parameters.AddWithValue("@Id", Id);
 
                         myUpdateCommand.ExecuteNonQuery();
-                        //using (SqlDataReader reader = myUpdateCommand.ExecuteReader())
-                        //{
-                        //    while (reader.Read())
-                        //    {
-
-                        //    }
-                        //}
-
-
-                        //myUpdateCommand.Parameters.Add("@roleId", roleId);
-
-                        //myUpdateCommand.ExecuteNonQuery();
 
                         conn.Close();
                         conn.Dispose();
 
                     }
-
-
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
