@@ -23,5 +23,6 @@ namespace BucBoard.Models
         public byte[] ProfilePicture { get; set; }
         public IdentityRole Roles { get; set; }
 
+
     }
 }

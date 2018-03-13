@@ -17,7 +17,7 @@ namespace BucBoard.Services
             //initializing custom roles 
             var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-            string[] roleNames = { "Admin", "Professor", "Student" };
+            string[] roleNames = { "Admin", "SuperAdmin" };
             IdentityResult roleResult;
 
             foreach (var roleName in roleNames)
@@ -47,7 +47,7 @@ namespace BucBoard.Services
                 if (createPowerUser.Succeeded)
                 {
                     //here we tie the new user to the role
-                    await UserManager.AddToRoleAsync(poweruser, "Admin");
+                    await UserManager.AddToRoleAsync(poweruser, "SuperAdmin");
 
                 }
             }
