@@ -1,0 +1,28 @@
+﻿.profilepicture {
+    float: left;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+}
+
+.actionbuttons {
+    float: right;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+}
+
+.announcements {
+    margin:auto;
+    float:none;
+    padding-top: 20px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+}
+
+.textbox{
+
+}
