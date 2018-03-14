@@ -1,5 +1,6 @@
 ﻿.profilepicture {
     float: left;
+    color: lightgrey;
     padding-top: 15px;
     padding-right: 15px;
     padding-bottom: 15px;
@@ -8,6 +9,7 @@
 
 .actionbuttons {
     float: right;
+    color: lightgrey;
     padding-top: 15px;
     padding-right: 15px;
     padding-bottom: 15px;
@@ -15,14 +17,15 @@
 }
 
 .announcements {
-    margin:auto;
-    float:none;
+    margin: auto;
+    color: lightgrey;
+    float: none;
     padding-top: 20px;
     padding-right: 15px;
     padding-bottom: 15px;
     padding-left: 15px;
 }
 
-.textbox{
-
-}
+/*body {
+    background-color: #041e42;
+}*/
