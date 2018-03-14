@@ -4672,13 +4672,13 @@ fieldset[disabled] .navbar-default .btn-link:focus {
   }
 }
 .navbar-inverse .navbar-link {
-  color: #9d9d9d;
+  color: black;
 }
 .navbar-inverse .navbar-link:hover {
   color: #fff;
 }
 .navbar-inverse .btn-link {
-  color: #9d9d9d;
+    color: black;
 }
 .navbar-inverse .btn-link:hover,
 .navbar-inverse .btn-link:focus {
