@@ -33,3 +33,20 @@
         display: none;
     }
 }
+
+.navbar-inverse .navbar-brand {
+    background-color: #ffc82e;
+    border-color: #ffc82e;
+    color: black;
+}
+
+.body {
+    color: lightgrey;
+}
+
+
+
+.navbar {
+    background-color: #ffc82e;
+    color: black;
+}

@@ -23,19 +23,7 @@ namespace BucBoard.Controllers
 
         public IActionResult Index()
         {
-            //var model = _repo.ReadAllAnnouncements()
-            //    .Select(a => new AnnounceIndexVM
-            //    {
-            //        message = a.Message
-            //    });
-
-            //var messages = _repo.ReadAllAnnouncements();
-            //var users = _repo.
-
-            //var query = from an in _repo.ReadAllAnnouncements()
-            //            where an.
-
-
+           
             return View(_repo.ReadAllAnnouncements());
         }
 
@@ -53,6 +41,54 @@ namespace BucBoard.Controllers
                 return RedirectToAction("Index", "Announcement");
             }
             return View();
+        }
+
+        public IActionResult Details(int id)
+        {
+            var announcement = _repo.ReadAnnouncement(id);
+            if (announcement == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(announcement);
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var announcement = _repo.ReadAnnouncement(id);
+            if (announcement == null)
+            {
+                return RedirectToAction("Index", "Announcement");
+            }
+            return View(announcement);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Edit(Announcement announcement)
+        {
+            if (ModelState.IsValid)
+            {
+                _repo.UpdateAnnouncement(announcement.Id, announcement);
+                return RedirectToAction("Index", "Announcement");
+            }
+            return View(announcement);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var announcement = _repo.ReadAnnouncement(id);
+            if (announcement == null)
+            {
+                return RedirectToAction("Index", "Announcement");
+            }
+            return View(announcement);
+        }
+
+        [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(int Id)
+        {
+            _repo.DeleteAnnouncement(Id);
+            return RedirectToAction("Index", "Announcement");
         }
 
     }
