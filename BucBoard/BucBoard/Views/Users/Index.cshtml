@@ -6,9 +6,9 @@
 
 <h2>@ViewData["Title"]</h2>
 
-<div class="container">
+@*<div class="container">
     @Html.ActionLink("Assign Role to User", "SelectUser")
-</div>
+</div>*@
 
 <table class="table">
     <tr>
@@ -26,6 +26,9 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Roles)
+        </th>
+        <th>
+            @Html.Raw("Manage")
         </th>
     </tr>
 
@@ -47,10 +50,15 @@
         <td>
             @Html.DisplayFor(modelItem => item.Roles.Name)
         </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "DeleteUser", new { id = item.Id })
+        </td>
 
     </tr>
-    }
 
+    }
 </table>
 
 

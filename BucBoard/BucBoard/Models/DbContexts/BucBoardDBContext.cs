@@ -17,7 +17,10 @@ namespace BucBoard.Models.Entities.Existing
         public virtual DbSet<ClassSchedule> ClassSchedule { get; set; }
         public virtual DbSet<ProfilePicture> ProfilePicture { get; set; }
 
-        
+        public BucBoardDBContext(DbContextOptions<BucBoardDBContext> options)
+            : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

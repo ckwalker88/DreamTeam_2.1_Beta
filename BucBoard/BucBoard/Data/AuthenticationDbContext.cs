@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using BucBoard.Models;
+using BucBoard.Models.Entities.Existing;
 
 namespace BucBoard.Data
 {
@@ -22,5 +23,9 @@ namespace BucBoard.Data
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
+
+        //public DbSet<Announcement> Announcements { get; set; }
+
+
     }
 }

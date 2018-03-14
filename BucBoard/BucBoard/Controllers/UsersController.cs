@@ -33,10 +33,19 @@ namespace BucBoard.Controllers
         }
 
         [Authorize(Roles = "SuperAdmin")]
+        public IActionResult DisplayUsers()
+        {
+            return View(_users.ReadAllUsersBB());
+        }
+
+
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult UserRoles()
         {
             return View(_users.ReadAllRoles());
         }
+
+        
 
         [Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> UserInRole()
@@ -62,6 +71,30 @@ namespace BucBoard.Controllers
         }
 
         [Authorize(Roles = "SuperAdmin")]
+        public IActionResult DeleteUser(string id)
+        {
+            var user = _users.ReadBB(id);
+            if (user == null)
+            {
+                return RedirectToAction("DisplayUsers");
+            }
+            return View(user);
+        }
+
+        [Authorize(Roles = "SuperAdmin")]
+        [ValidateAntiForgeryToken]
+        [HttpPost, ActionName("DeleteUser")]
+        public async Task<IActionResult> DeleteUserConfirmed(string id)
+        {
+            var user = _users.Read(id);
+            await _userManager.DeleteAsync(user);
+            //_users.Delete(id);
+            return RedirectToAction("DisplayUsers");
+        }
+
+
+
+        [Authorize(Roles = "SuperAdmin")]
         public IActionResult SelectUserToDelete()
         {
             return View(_users.ReadAllUsers());
@@ -70,10 +103,10 @@ namespace BucBoard.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "SuperAdmin")]
-        public async Task<IActionResult> DeleteUser(ApplicationUser user)
+        public async Task<IActionResult> DeleteUserAsync(ApplicationUser user)
         {
             
-            var applicationUser = await _userManager.DeleteAsync(user);
+            await _userManager.DeleteAsync(user);
 
             return RedirectToAction("Index");
         }

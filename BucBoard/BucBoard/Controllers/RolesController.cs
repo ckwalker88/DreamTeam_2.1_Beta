@@ -22,5 +22,11 @@ namespace BucBoard.Controllers
             return View(_roles.ReadAllRoles());
         }
 
+        [Authorize(Roles = "SuperAdmin")]
+        public IActionResult DisplayRoles()
+        {
+            return View(_roles.ReadAllUserRoles());
+        }
+
     }
 }
