@@ -23,14 +23,4 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
   </ItemGroup>
 
-<<<<<<< HEAD
-=======
-  <ItemGroup>
-    <Folder Include="Models\Entities\" />
-    <Folder Include="Models\DbContexts\" />
-    <Folder Include="Models\ViewModels\" />
-    <Folder Include="images\" />
-  </ItemGroup>
-
->>>>>>> Daddy
 </Project>
