@@ -13,6 +13,7 @@ using BucBoard.Models;
 using BucBoard.Services;
 using Microsoft.Extensions.Logging;
 using BucBoard.Services.Interfaces;
+using BucBoard.Models.Entities.Existing;
 
 namespace BucBoard
 {
@@ -32,6 +33,11 @@ namespace BucBoard
             services.AddDbContext<AuthenticationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("BucBoardDB")));
 
+            services.AddDbContext<BucBoardDBContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("BucBoardDB")));
+
+
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<AuthenticationDbContext>()
                 .AddDefaultTokenProviders();
@@ -42,6 +48,7 @@ namespace BucBoard
             services.AddMvc();
             
             services.AddScoped<IAuthenticationRepository, DbAuthenticationRepository>();
+            services.AddScoped<IAnnouncementRepository, DbAnnouncementRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
