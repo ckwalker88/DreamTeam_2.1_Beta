@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace BucBoard.Models.Professor
+namespace BucBoard.Models.Entities.Existing
 {
     public partial class BucBoardDBContext : DbContext
     {
-        public virtual DbSet<Admin> Admin { get; set; }
+        public virtual DbSet<Announcement> Announcement { get; set; }
         public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
@@ -14,57 +14,28 @@ namespace BucBoard.Models.Professor
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
-        public virtual DbSet<SuperAdmin> SuperAdmin { get; set; }
+        public virtual DbSet<ClassSchedule> ClassSchedule { get; set; }
+        public virtual DbSet<ProfilePicture> ProfilePicture { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public BucBoardDBContext(DbContextOptions<BucBoardDBContext> options)
+            : base(options)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-       
-                optionsBuilder.UseSqlServer(@"Data Source=bucboard.database.windows.net;Initial Catalog=BucBoardDB;Integrated Security=False;User ID=bucboard18;Password=FyoCouch!;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Admin>(entity =>
+            modelBuilder.Entity<Announcement>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.ClassSchedule)
-                    .HasColumnName("Class_Schedule")
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Email)
+                entity.Property(e => e.ApplicationUserId)
                     .IsRequired()
-                    .IsUnicode(false);
+                    .HasMaxLength(450);
 
-                entity.Property(e => e.FirstName)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Headline)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.LastName)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.ProfilePicture)
-                    .HasColumnName("Profile_Picture")
-                    .HasColumnType("image");
-
-                entity.Property(e => e.Username)
-                    .IsRequired()
-                    .IsUnicode(false);
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.Announcement)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasConstraintName("FK_ApplicationUserId_AnnouncementID");
             });
 
             modelBuilder.Entity<AspNetRoleClaims>(entity =>
@@ -81,7 +52,9 @@ namespace BucBoard.Models.Professor
             modelBuilder.Entity<AspNetRoles>(entity =>
             {
                 entity.HasIndex(e => e.NormalizedName)
-                    .HasName("RoleNameIndex");
+                    .HasName("RoleNameIndex")
+                    .IsUnique()
+                    .HasFilter("([NormalizedName] IS NOT NULL)");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -120,8 +93,6 @@ namespace BucBoard.Models.Professor
 
                 entity.HasIndex(e => e.RoleId);
 
-                entity.HasIndex(e => e.UserId);
-
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.AspNetUserRoles)
                     .HasForeignKey(d => d.RoleId);
@@ -138,7 +109,10 @@ namespace BucBoard.Models.Professor
 
                 entity.HasIndex(e => e.NormalizedUserName)
                     .HasName("UserNameIndex")
-                    .IsUnique();
+                    .IsUnique()
+                    .HasFilter("([NormalizedUserName] IS NOT NULL)");
+
+                entity.HasIndex(e => e.RolesId);
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -149,29 +123,47 @@ namespace BucBoard.Models.Professor
                 entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
 
                 entity.Property(e => e.UserName).HasMaxLength(256);
+
+                entity.HasOne(d => d.Roles)
+                    .WithMany(p => p.AspNetUsers)
+                    .HasForeignKey(d => d.RolesId);
             });
 
             modelBuilder.Entity<AspNetUserTokens>(entity =>
             {
                 entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserTokens)
+                    .HasForeignKey(d => d.UserId);
             });
 
-            modelBuilder.Entity<SuperAdmin>(entity =>
+            modelBuilder.Entity<ClassSchedule>(entity =>
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
-                entity.Property(e => e.Email)
+                entity.Property(e => e.ApplicationUserId)
                     .IsRequired()
-                    .IsUnicode(false);
+                    .HasMaxLength(450);
 
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.ClassScheduleNavigation)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasConstraintName("FK_ApplicationUserId_ApplUserID");
+            });
 
-                entity.Property(e => e.Username)
+            modelBuilder.Entity<ProfilePicture>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.ApplicationUserId)
                     .IsRequired()
-                    .IsUnicode(false);
+                    .HasMaxLength(450);
+
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.ProfilePictureNavigation)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasConstraintName("FK_ApplicationUserId_AppUserID");
             });
         }
     }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BucBoard.Models.Professor
+namespace BucBoard.Models.Entities.Existing
 {
     public partial class AspNetRoleClaims
     {

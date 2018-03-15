@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BucBoard.Models.Professor
+namespace BucBoard.Models.Entities.Existing
 {
     public partial class AspNetRoles
     {
@@ -9,6 +9,7 @@ namespace BucBoard.Models.Professor
         {
             AspNetRoleClaims = new HashSet<AspNetRoleClaims>();
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
+            AspNetUsers = new HashSet<AspNetUsers>();
         }
 
         public string Id { get; set; }
@@ -18,5 +19,6 @@ namespace BucBoard.Models.Professor
 
         public ICollection<AspNetRoleClaims> AspNetRoleClaims { get; set; }
         public ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
+        public ICollection<AspNetUsers> AspNetUsers { get; set; }
     }
 }

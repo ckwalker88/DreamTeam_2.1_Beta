@@ -23,29 +23,26 @@ namespace BucBoard
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var initializer = services.GetRequiredService<Initializer>();
-                    initializer.SeedAsync().Wait();
+
+                    var serviceProvider = services.GetRequiredService<IServiceProvider>();
+                    var configuration = services.GetRequiredService<IConfiguration>();
+                    Seed.CreateRoles(serviceProvider, configuration).Wait();
+                    
                 }
-                catch (Exception)
+                catch (Exception exception)
                 {
                     var logger = services.GetRequiredService<ILogger<Program>>();
-                    logger.LogError("An error occured while seeding the database.");
+                    logger.LogError(exception, "An error occurred while creating roles");
                 }
             }
 
-             //BuildWebHost(args).Run();
-             host.Run();
+            host.Run();
+
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>()
-                .UseApplicationInsights()
-                .Build();
-
-
+            .UseStartup<Startup>()
+            .Build();
     }
 }

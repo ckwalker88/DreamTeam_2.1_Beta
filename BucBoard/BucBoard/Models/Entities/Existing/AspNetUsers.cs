@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BucBoard.Models.Professor
+namespace BucBoard.Models.Entities.Existing
 {
     public partial class AspNetUsers
     {
         public AspNetUsers()
         {
+            Announcement = new HashSet<Announcement>();
             AspNetUserClaims = new HashSet<AspNetUserClaims>();
             AspNetUserLogins = new HashSet<AspNetUserLogins>();
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
+            AspNetUserTokens = new HashSet<AspNetUserTokens>();
+            ClassScheduleNavigation = new HashSet<ClassSchedule>();
+            ProfilePictureNavigation = new HashSet<ProfilePicture>();
         }
 
         public string Id { get; set; }
@@ -27,9 +31,21 @@ namespace BucBoard.Models.Professor
         public string SecurityStamp { get; set; }
         public bool TwoFactorEnabled { get; set; }
         public string UserName { get; set; }
+        public string ClassSchedule { get; set; }
+        public string FirstName { get; set; }
+        public string HeadLine { get; set; }
+        public DateTime? LastLogin { get; set; }
+        public string LastName { get; set; }
+        public byte[] ProfilePicture { get; set; }
+        public string RolesId { get; set; }
 
+        public AspNetRoles Roles { get; set; }
+        public ICollection<Announcement> Announcement { get; set; }
         public ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         public ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
+        public ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
+        public ICollection<ClassSchedule> ClassScheduleNavigation { get; set; }
+        public ICollection<ProfilePicture> ProfilePictureNavigation { get; set; }
     }
 }

@@ -59,6 +59,7 @@ namespace BucBoard.Controllers
             {
                 Username = user.UserName,
                 Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
                 IsEmailConfirmed = user.EmailConfirmed,
                 StatusMessage = StatusMessage
             };
@@ -90,7 +91,16 @@ namespace BucBoard.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
                 }
             }
-            
+
+            var phoneNumber = user.PhoneNumber;
+            if (model.PhoneNumber != phoneNumber)
+            {
+                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
+                if (!setPhoneResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                }
+            }
 
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));

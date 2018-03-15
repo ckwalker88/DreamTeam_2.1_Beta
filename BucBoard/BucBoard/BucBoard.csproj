@@ -7,11 +7,14 @@
 
 
   <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="2.6.362" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.2" PrivateAssets="All" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.4.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,8 +24,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Entities\" />
     <Folder Include="Models\DbContexts\" />
     <Folder Include="Models\ViewModels\" />
+    <Folder Include="images\" />
   </ItemGroup>
 
 </Project>

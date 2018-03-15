@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace BucBoard.Models.Professor
+namespace BucBoard.Models.Entities.Existing
 {
     public partial class AspNetUserTokens
     {
@@ -9,5 +9,7 @@ namespace BucBoard.Models.Professor
         public string LoginProvider { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }
+
+        public AspNetUsers User { get; set; }
     }
 }
