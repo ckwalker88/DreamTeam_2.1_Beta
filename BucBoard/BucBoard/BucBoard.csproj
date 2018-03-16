@@ -24,8 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\Entities\" />
-    <Folder Include="Models\DbContexts\" />
     <Folder Include="Models\ViewModels\" />
     <Folder Include="images\" />
   </ItemGroup>

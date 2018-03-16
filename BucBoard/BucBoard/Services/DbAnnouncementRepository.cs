@@ -32,14 +32,6 @@ namespace BucBoard.Services
             return announcement;
         }
 
-        public Announcement CreateAnnouncement(Announcement announcement, string id)
-        {
-            //_db.AspNetUsers.
-            _db.Announcement.Add(announcement);
-            _db.SaveChanges();
-            return announcement;
-        }
-
         public void DeleteAnnouncement(int id)
         {
             Announcement announcement = _db.Announcement.Find(id);

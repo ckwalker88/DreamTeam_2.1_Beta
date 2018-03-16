@@ -10,7 +10,5 @@ namespace BucBoard.Models.Entities.Existing
         public string ApplicationUserId { get; set; }
 
         public AspNetUsers ApplicationUser { get; set; }
-
-
     }
 }
