@@ -26,8 +26,6 @@ namespace BucBoard.Models.Entities.Existing
         {
             modelBuilder.Entity<Announcement>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.ApplicationUserId)
                     .IsRequired()
                     .HasMaxLength(450);
@@ -140,8 +138,6 @@ namespace BucBoard.Models.Entities.Existing
 
             modelBuilder.Entity<ClassSchedule>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.ApplicationUserId)
                     .IsRequired()
                     .HasMaxLength(450);
@@ -154,8 +150,6 @@ namespace BucBoard.Models.Entities.Existing
 
             modelBuilder.Entity<ProfilePicture>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.ApplicationUserId)
                     .IsRequired()
                     .HasMaxLength(450);

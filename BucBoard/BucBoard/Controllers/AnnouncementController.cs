@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BucBoard.Models;
 using BucBoard.Models.Entities.Existing;
 using BucBoard.Models.ViewModels;
 using BucBoard.Services.Interfaces;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BucBoard.Controllers
@@ -13,12 +15,14 @@ namespace BucBoard.Controllers
 
     public class AnnouncementController : Controller
     {
+        private UserManager<ApplicationUser> _userManager;
 
         private IAnnouncementRepository _repo;
 
-        public AnnouncementController(IAnnouncementRepository repo)
+        public AnnouncementController(IAnnouncementRepository repo, UserManager<ApplicationUser> userManager)
         {
             _repo = repo;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -29,6 +33,7 @@ namespace BucBoard.Controllers
 
         public IActionResult Create()
         {
+            ViewBag.userId = _userManager.GetUserId(HttpContext.User);
             return View();
         }
 

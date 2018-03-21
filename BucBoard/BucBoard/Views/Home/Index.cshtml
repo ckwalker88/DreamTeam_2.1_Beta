@@ -1,5 +1,8 @@
-﻿@{
+﻿@model IEnumerable<BucBoard.Models.Entities.Existing.Announcement>
+
+@{
     ViewData["Title"] = "Home Page";
+    var announcementItem = ViewData["announcementItem"];
 }
 <!--
     <div style="background-color:#041e42; color:lightgray;">
@@ -36,7 +39,12 @@
     <h1 style="text-align:center;">Announcements</h1>
     <div>
         <textarea rows="22" cols="95" style="color:black;">
-        This is test text. This will be where the professor will throw their announcements for the student to see. It works very well for the most part. This will be customized a bit more later on.
+        @foreach (var item in Model)
+           
+        {      
+           @Html.DisplayFor(Item => item.Message) 
+            
+        }
         </textarea>
     </div>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
