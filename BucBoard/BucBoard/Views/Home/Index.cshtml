@@ -1,8 +1,16 @@
-﻿@model IEnumerable<BucBoard.Models.Entities.Existing.Announcement>
+﻿@model ICollection<BucBoard.Models.Entities.Existing.Announcement>
+@using BucBoard.Models.Entities.Existing
 
 @{
     ViewData["Title"] = "Home Page";
-    var announcementItem = ViewData["announcementItem"];
+    Announcement[] announcements = new Announcement[Model.Count];
+    Model.CopyTo(announcements, 0);
+
+    string message3 = announcements[announcements.Length -1].Message;
+
+    string message2 = announcements[announcements.Length - 2].Message;
+
+    string message1 = announcements[announcements.Length - 3].Message;
 }
 <!--
     <div style="background-color:#041e42; color:lightgray;">
@@ -39,12 +47,9 @@
     <h1 style="text-align:center;">Announcements</h1>
     <div>
         <textarea rows="22" cols="95" style="color:black;">
-        @foreach (var item in Model)
-           
-        {      
-           @Html.DisplayFor(Item => item.Message) 
-            
-        }
+        @message1
+        @message2
+        @message3 
         </textarea>
     </div>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
