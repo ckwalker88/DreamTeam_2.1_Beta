@@ -5,12 +5,54 @@
     ViewData["Title"] = "Home Page";
     Announcement[] announcements = new Announcement[Model.Count];
     Model.CopyTo(announcements, 0);
+    string message1 = "";
+    string message2 = "";
+    string message3 = "";
+    string message4 = "";
+    string message5 = "";
+    string message6 = "";
+    string message7 = "";
+    string message8 = "";
 
-    string message3 = announcements[announcements.Length -1].Message;
+    if (Model.Count >= 1)
+    {
+        message1 = announcements[announcements.Length - 1].Message;
+    }
 
-    string message2 = announcements[announcements.Length - 2].Message;
+    if (Model.Count >= 2)
+    {
+        message2 = announcements[announcements.Length - 2].Message;
+    }
 
-    string message1 = announcements[announcements.Length - 3].Message;
+    if (Model.Count >= 3)
+    {
+        message3 = announcements[announcements.Length - 3].Message;
+    }
+
+    if (Model.Count >= 4)
+    {
+        message4 = announcements[announcements.Length - 4].Message;
+    }
+
+    if (Model.Count >= 5)
+    {
+        message5 = announcements[announcements.Length - 5].Message;
+    }
+
+    if (Model.Count >= 6)
+    {
+        message6 = announcements[announcements.Length - 6].Message;
+    }
+
+    if (Model.Count >= 7)
+    {
+        message7 = announcements[announcements.Length - 7].Message;
+    }
+
+    if (Model.Count >= 8)
+    {
+        message8 = announcements[announcements.Length - 8].Message;
+    }
 }
 <!--
     <div style="background-color:#041e42; color:lightgray;">
@@ -48,8 +90,27 @@
     <div>
         <textarea rows="22" cols="95" style="color:black;">
         @message1
+
+
         @message2
-        @message3 
+
+
+        @message3
+
+        
+        @message4
+
+
+        @message5
+
+
+        @message6
+
+
+        @message7
+
+
+        @message8
         </textarea>
     </div>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
