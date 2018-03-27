@@ -6,6 +6,7 @@ using BucBoard.Models;
 using BucBoard.Models.Entities.Existing;
 using BucBoard.Models.ViewModels;
 using BucBoard.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,18 +26,21 @@ namespace BucBoard.Controllers
             _userManager = userManager;
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public IActionResult Index()
         {
            
             return View(_repo.ReadAllAnnouncements());
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public IActionResult Create()
         {
             ViewBag.userId = _userManager.GetUserId(HttpContext.User);
             return View();
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Create(Announcement announcement)
         {
@@ -48,6 +52,7 @@ namespace BucBoard.Controllers
             return View();
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public IActionResult Details(int id)
         {
             var announcement = _repo.ReadAnnouncement(id);
@@ -58,6 +63,7 @@ namespace BucBoard.Controllers
             return View(announcement);
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public IActionResult Edit(int id)
         {
             var announcement = _repo.ReadAnnouncement(id);
@@ -68,6 +74,7 @@ namespace BucBoard.Controllers
             return View(announcement);
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Edit(Announcement announcement)
         {
@@ -79,6 +86,7 @@ namespace BucBoard.Controllers
             return View(announcement);
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public IActionResult Delete(int id)
         {
             var announcement = _repo.ReadAnnouncement(id);
@@ -89,6 +97,7 @@ namespace BucBoard.Controllers
             return View(announcement);
         }
 
+        [Authorize(Roles = "SuperAdmin, Admin")]
         [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int Id)
         {
