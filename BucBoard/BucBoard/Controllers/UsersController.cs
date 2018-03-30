@@ -89,13 +89,18 @@ namespace BucBoard.Controllers
             var user = _users.Read(id);
             await _userManager.DeleteAsync(user);
             //_users.Delete(id);
-            return RedirectToAction("DisplayUsers");
+            return RedirectToAction("Index");
         }
-
 
 
         [Authorize(Roles = "SuperAdmin")]
         public IActionResult SelectUserToDelete()
+        {
+            return View(_users.ReadAllUsers());
+        }
+
+        [Authorize(Roles = "SuperAdmin")]
+        public IActionResult EditUser()
         {
             return View(_users.ReadAllUsers());
         }

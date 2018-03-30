@@ -14,8 +14,10 @@ namespace BucBoard.Models.Entities.Existing
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
-        public virtual DbSet<ClassSchedule> ClassSchedule { get; set; }
+        public virtual DbSet<Course> Course { get; set; }
+        public virtual DbSet<DayOfWeek> DayOfWeek { get; set; }
         public virtual DbSet<ProfilePicture> ProfilePicture { get; set; }
+        public virtual DbSet<Time> Time { get; set; }
 
         public BucBoardDBContext(DbContextOptions<BucBoardDBContext> options)
             : base(options)
@@ -26,8 +28,6 @@ namespace BucBoard.Models.Entities.Existing
         {
             modelBuilder.Entity<Announcement>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.ApplicationUserId)
                     .IsRequired()
                     .HasMaxLength(450);
@@ -138,24 +138,40 @@ namespace BucBoard.Models.Entities.Existing
                     .HasForeignKey(d => d.UserId);
             });
 
-            modelBuilder.Entity<ClassSchedule>(entity =>
+            modelBuilder.Entity<Course>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.ApplicationUserId)
                     .IsRequired()
                     .HasMaxLength(450);
 
+                entity.Property(e => e.CourseCode)
+                    .IsRequired()
+                    .HasColumnType("nchar(10)");
+
+                entity.Property(e => e.CourseName).IsRequired();
+
                 entity.HasOne(d => d.ApplicationUser)
-                    .WithMany(p => p.ClassScheduleNavigation)
+                    .WithMany(p => p.Course)
                     .HasForeignKey(d => d.ApplicationUserId)
-                    .HasConstraintName("FK_ApplicationUserId_ApplUserID");
+                    .HasConstraintName("FK_Course");
+            });
+
+            modelBuilder.Entity<DayOfWeek>(entity =>
+            {
+                entity.Property(e => e.ApplicationUserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Day).IsRequired();
+
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.DayOfWeek)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasConstraintName("FK_DayOfWeek");
             });
 
             modelBuilder.Entity<ProfilePicture>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.ApplicationUserId)
                     .IsRequired()
                     .HasMaxLength(450);
@@ -164,6 +180,22 @@ namespace BucBoard.Models.Entities.Existing
                     .WithMany(p => p.ProfilePictureNavigation)
                     .HasForeignKey(d => d.ApplicationUserId)
                     .HasConstraintName("FK_ApplicationUserId_AppUserID");
+            });
+
+            modelBuilder.Entity<Time>(entity =>
+            {
+                entity.Property(e => e.ApplicationUserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.StartTime).HasColumnType("datetime");
+
+                entity.Property(e => e.StopTime).HasColumnType("datetime");
+
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.Time)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasConstraintName("FK_Time");
             });
         }
     }
