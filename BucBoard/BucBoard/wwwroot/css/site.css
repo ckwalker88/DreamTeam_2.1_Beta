@@ -2,7 +2,7 @@
     padding-top: 50px;
     padding-bottom: 20px;
     background-color: #041e42;
-    color: lightgrey;
+    color: #f9f9f9;
 }
 
 /* Wrapping element */
@@ -43,7 +43,7 @@
 }
 
 .body {
-    color: lightgrey;
+    color: #f9f9f9;
 }
 
 

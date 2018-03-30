@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Email";
+}
+
+<h2>Send Me An Email!</h2>
+
+
+<form class="form-horizontal">
+    <fieldset>
+
+        <!-- Student email form-->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="textinput">Student Email</label>
+            <div class="col-md-4">
+                <input id="email" name="email" type="text" placeholder="Enter Here" class="form-control input-md" required="">
+
+            </div>
+        </div>
+
+        <!-- Email subject form-->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="textinput">Subject</label>
+            <div class="col-md-4">
+                <input id="subject" name="subject" type="text" placeholder="" class="form-control input-md" required="">
+
+            </div>
+        </div>
+
+        <!-- Message for email -->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="textarea">Message</label>
+            <div class="col-md-4">
+                <textarea class="form-control" id="message" name="textarea" style="width:600px; height:200px; resize: none;"></textarea>
+            </div>
+        </div>
+
+        <!-- Send button -->
+        <div class="form-group">
+            <label class="col-md-2 control-label" for="sendbutton"></label>
+            <div class="col-md-4">
+                <button id="sendbutton" name="sendbutton" class="btn btn-danger">Send</button>
+            </div>
+        </div>
+
+    </fieldset>
+</form>

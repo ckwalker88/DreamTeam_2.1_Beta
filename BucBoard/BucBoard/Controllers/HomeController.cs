@@ -23,6 +23,11 @@ namespace BucBoard.Controllers
             return View(_repo.ReadAllAnnouncements());
         }
 
+        public IActionResult Email()
+        {
+            return View();
+        }
+
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
