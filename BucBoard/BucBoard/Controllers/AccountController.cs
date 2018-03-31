@@ -67,13 +67,18 @@ namespace BucBoard.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+#if DEBUG
+                model.Email = "BBsuperman@gmail.com";
+                model.Password = "P@ssw0rd";
+#endif
+
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToLocal(returnUrl ?? Url.Action( controller: "Announcement", action: "Index"));
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -235,11 +240,11 @@ namespace BucBoard.Controllers
                     _logger.LogInformation("User created a new account with password.");
 
                     //Add a user to the default role, or any role we specify 
-                    await _userManager.AddToRoleAsync(user, "Admin");
+                    await _userManager.AddToRoleAsync(user, "SuperAdmin");
 
                     //Add the role "Admin" Id to the RolesId column in the AspNetUsers table 
                     string role = "c2181b3b-f186-4439-bbba-9a0a68585791";
-                    
+
                     //Get the users id for the query below
                     string Id = await _userManager.GetUserIdAsync(user);
 

@@ -7,20 +7,38 @@ using Microsoft.AspNetCore.Mvc;
 using BucBoard.Models;
 using BucBoard.Services.Interfaces;
 using BucBoard.Models.Entities.Existing;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BucBoard.Controllers
 {
+    [Authorize(Roles = "SuperAdmin, Admin")]
     public class HomeController : Controller
     {
-        private IAnnouncementRepository _repo;
+        private ICourseRepository _courseRepository;
+        private IAnnouncementRepository _announcementRepo;
+        private UserManager<ApplicationUser> _userManager;
 
-        public HomeController(IAnnouncementRepository repo)
+        public HomeController(ICourseRepository courseRepository, IAnnouncementRepository announcementRepo, UserManager<ApplicationUser> userManager)
         {
-            _repo = repo;
+            _courseRepository = courseRepository;
+            _announcementRepo = announcementRepo;
+            _userManager = userManager;
         }
         public IActionResult Index()
         {
-            return View(_repo.ReadAllAnnouncements());
+            ViewBag.UserId = _userManager.GetUserId(HttpContext.User);
+
+            var announcements = _announcementRepo.ReadAllAnnouncements();
+            var query = announcements.Where(a => a.ApplicationUserId == ViewBag.UserId);
+            var model = query.ToList();
+
+            var courses = _courseRepository.ReadAllCourses();
+            var query2 = courses.Where(c => c.ApplicationUserId == ViewBag.UserId);
+            var model2 = query2.ToList();
+
+            ViewBag.courseList = model2;
+            return View(model);
         }
 
         public IActionResult About()

@@ -3,6 +3,19 @@
 
 @{
     ViewData["Title"] = "Home Page";
+    var courseList = (ViewBag.courseList as ICollection<Course>);
+
+    Course[] courses = new Course[courseList.Count];
+    courseList.CopyTo(courses, 0);
+    string courseCode1 = "";
+    int courseNumber1 = 0;
+    string courseCode2 = "";
+    int courseNumber2 = 0;
+    string courseCode3 = "";
+    int courseNumber3 = 0;
+    string courseCode4 = "";
+    int courseNumber4 = 0;
+
     Announcement[] announcements = new Announcement[Model.Count];
     Model.CopyTo(announcements, 0);
     string message1 = "";
@@ -13,6 +26,36 @@
     string message6 = "";
     string message7 = "";
     string message8 = "";
+
+    if (courseList.Count >= 1)
+    {
+        courseCode1 = courses[courses.Length - 1].CourseCode.Trim();
+        courseNumber1 = courses[courses.Length - 1].CourseNumber;
+    }
+
+    if (courseList.Count >= 2)
+    {
+        courseCode2 = courses[courses.Length - 2].CourseCode.Trim();
+        courseNumber2 = courses[courses.Length - 2].CourseNumber;
+    }
+
+    if (courseList.Count >= 3)
+    {
+        courseCode3 = courses[courses.Length - 3].CourseCode.Trim();
+        courseNumber3 = courses[courses.Length - 3].CourseNumber;
+    }
+
+    if (courseList.Count >= 4)
+    {
+        courseCode4 = courses[courses.Length - 4].CourseCode.Trim();
+        courseNumber4 = courses[courses.Length - 4].CourseNumber;
+    }
+
+
+
+
+
+
 
     if (Model.Count >= 1)
     {
@@ -72,17 +115,21 @@
     <div>
         <i class="fa fa-camera-retro" style="font-size:128px;"></i>
     </div>
-    <div>
+    <div class="schedule">
         <h3 style="text-align:center;">Schedule</h3>
         <textarea rows="16" cols="15" style="color:black;">
-        This is where the professor will have their schedule for their courses and office hours.
+@courseCode1 @courseNumber1
+
+@courseCode2 @courseNumber2
         </textarea>
     </div>
 </div>
 <div class="actionbuttons">
     <div>
-        <i class="fa fa-send-o" style="font-size:128px;"></i>
-        <i class="fa fa-calendar" style="font-size:128px;"></i>
+        <a asp-action="Create" asp-controller="Email">
+            <i class="fa fa-send-o" style="font-size:128px;"></i>
+        </a>
+            <i class="fa fa-calendar" style="font-size:128px;"></i>
     </div>
 </div>
 <div class="announcements">
