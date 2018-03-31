@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using BucBoard.Models;
 using BucBoard.Models.Entities.Existing;
-using BucBoard.Models.ViewModels;
 using BucBoard.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,15 +11,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BucBoard.Controllers
 {
-
     [Authorize(Roles = "SuperAdmin, Admin")]
-    public class AnnouncementController : Controller
+    public class CourseController : Controller
     {
+        private ICourseRepository _repo;
         private UserManager<ApplicationUser> _userManager;
 
-        private IAnnouncementRepository _repo;
-
-        public AnnouncementController(IAnnouncementRepository repo, UserManager<ApplicationUser> userManager)
+        public CourseController(ICourseRepository repo, UserManager<ApplicationUser> userManager)
         {
             _repo = repo;
             _userManager = userManager;
@@ -28,8 +25,8 @@ namespace BucBoard.Controllers
 
         public IActionResult Index()
         {
-           
-            return View(_repo.ReadAllAnnouncements());
+
+            return View(_repo.ReadAllCourses());
         }
 
         public IActionResult Create()
@@ -39,63 +36,62 @@ namespace BucBoard.Controllers
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult Create(Announcement announcement)
+        public IActionResult Create(Course course)
         {
             if (ModelState.IsValid)
             {
-                _repo.CreateAnnouncement(announcement);
-                return RedirectToAction("Index", "Announcement");
+                _repo.CreateCourse(course);
+                return RedirectToAction("Index", "Course");
             }
             return View();
         }
 
         public IActionResult Details(int id)
         {
-            var announcement = _repo.ReadAnnouncement(id);
-            if (announcement == null)
+            var course = _repo.ReadCourse(id);
+            if (course == null)
             {
                 return RedirectToAction("Index");
             }
-            return View(announcement);
+            return View(course);
         }
 
         public IActionResult Edit(int id)
         {
-            var announcement = _repo.ReadAnnouncement(id);
-            if (announcement == null)
+            var course = _repo.ReadCourse(id);
+            if (course == null)
             {
-                return RedirectToAction("Index", "Announcement");
+                return RedirectToAction("Index", "Course");
             }
-            return View(announcement);
+            return View(course);
         }
 
         [HttpPost, ValidateAntiForgeryToken]
-        public IActionResult Edit(Announcement announcement)
+        public IActionResult Edit(Course course)
         {
             if (ModelState.IsValid)
             {
-                _repo.UpdateAnnouncement(announcement.Id, announcement);
-                return RedirectToAction("Index", "Announcement");
+                _repo.UpdateCourse(course.Id, course);
+                return RedirectToAction("Index", "Course");
             }
-            return View(announcement);
+            return View(course);
         }
 
         public IActionResult Delete(int id)
         {
-            var announcement = _repo.ReadAnnouncement(id);
-            if (announcement == null)
+            var course = _repo.ReadCourse(id);
+            if (course == null)
             {
-                return RedirectToAction("Index", "Announcement");
+                return RedirectToAction("Index", "Course");
             }
-            return View(announcement);
+            return View(course);
         }
 
         [HttpPost, ActionName("Delete"), ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int Id)
         {
-            _repo.DeleteAnnouncement(Id);
-            return RedirectToAction("Index", "Announcement");
+            _repo.DeleteCourse(Id);
+            return RedirectToAction("Index", "Course");
         }
-
     }
 }
