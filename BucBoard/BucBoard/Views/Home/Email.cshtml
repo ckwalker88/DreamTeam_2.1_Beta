@@ -1,20 +1,26 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Email";
+}
+
+<br />
+<br />
+
+@if(ViewBag.Error != null)
+{
+    <h2>@ViewBag.Error</h2>
 }
 
 <h2>Send Me An Email!</h2>
 
 
-<form class="form-horizontal">
+<form class="form-horizontal" method="post" action="Email">
     <fieldset>
 
         <!-- Student email form-->
         <div class="form-group">
             <label class="col-md-2 control-label" for="textinput">Student Email</label>
             <div class="col-md-4">
-                <input id="email" name="email" type="text" placeholder="Enter Here" class="form-control input-md" required="">
-
+                <input id="studentEmail" name="studentEmail" type="text" class="form-control input-md" required="">
             </div>
         </div>
 
@@ -22,7 +28,7 @@
         <div class="form-group">
             <label class="col-md-2 control-label" for="textinput">Subject</label>
             <div class="col-md-4">
-                <input id="subject" name="subject" type="text" placeholder="" class="form-control input-md" required="">
+                <input id="emailSubject" nameemailSubjectsubject" type="text" placeholder="" class="form-control input-md" required="">
 
             </div>
         </div>
@@ -31,7 +37,7 @@
         <div class="form-group">
             <label class="col-md-2 control-label" for="textarea">Message</label>
             <div class="col-md-4">
-                <textarea class="form-control" id="message" name="textarea" style="width:600px; height:200px; resize: none;"></textarea>
+                <textarea class="form-control" id="emailMessage" name="emailMessage" style="width:600px; height:200px; resize: none;"></textarea>
             </div>
         </div>
 
@@ -39,9 +45,14 @@
         <div class="form-group">
             <label class="col-md-2 control-label" for="sendbutton"></label>
             <div class="col-md-4">
-                <button id="sendbutton" name="sendbutton" class="btn btn-danger">Send</button>
+                <input id="sendbutton" name="sendbutton" class="btn btn-danger" type="submit" value="Send">
             </div>
         </div>
 
     </fieldset>
 </form>
+
+<div>
+    <a href="/home/index">Back to buc board</a>
+</div>
+
