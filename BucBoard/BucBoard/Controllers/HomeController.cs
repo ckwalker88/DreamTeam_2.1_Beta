@@ -14,6 +14,7 @@ using System.Net;
 
 namespace BucBoard.Controllers
 {
+    //son_of_anarchy - change
     [Authorize(Roles = "SuperAdmin, Admin")]
     public class HomeController : Controller
     {
