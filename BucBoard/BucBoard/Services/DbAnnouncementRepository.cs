@@ -32,19 +32,9 @@ namespace BucBoard.Services
             return announcement;
         }
 
-        public Announcement CreateAnnouncement(Announcement announcement, string id)
+        public Announcement ReadAnnouncement(int id)
         {
-            //_db.AspNetUsers.
-            _db.Announcement.Add(announcement);
-            _db.SaveChanges();
-            return announcement;
-        }
-
-        public void DeleteAnnouncement(int id)
-        {
-            Announcement announcement = _db.Announcement.Find(id);
-            _db.Announcement.Remove(announcement);
-            _db.SaveChanges();
+            return _db.Announcement.FirstOrDefault(a => a.Id == id);
         }
 
         public ICollection<Announcement> ReadAllAnnouncements()
@@ -55,16 +45,17 @@ namespace BucBoard.Services
                 .ToList();
         }
 
-        public Announcement ReadAnnouncement(int id)
-        {
-            return _db.Announcement.FirstOrDefault(a => a.Id == id);
-        }
-
         public void UpdateAnnouncement(int id, Announcement announcement)
         {
             _db.Entry(announcement).State = EntityState.Modified;
             _db.SaveChanges();
         }
 
+        public void DeleteAnnouncement(int id)
+        {
+            Announcement announcement = _db.Announcement.Find(id);
+            _db.Announcement.Remove(announcement);
+            _db.SaveChanges();
+        }
     }
 }
