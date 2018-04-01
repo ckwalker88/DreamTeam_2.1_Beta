@@ -16,6 +16,11 @@ SQL Server Admin Login Username = bucboard18
 				   
 Database Server Location = eastus
 
+
+DbContextForce
+
+Scaffold-DbContext -force "Data Source=bucboard.database.windows.net;Initial Catalog=BucBoardDB;Integrated Security=False;User ID=bucboard18;Password=FyoCouch!;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models/Entities/Existing
+
 				   
 				   
 	

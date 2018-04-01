@@ -15,7 +15,7 @@ namespace BucBoard.Models.Entities.Existing
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<Course> Course { get; set; }
-        public virtual DbSet<DayOfWeek> DayOfWeek { get; set; }
+        public virtual DbSet<DayOfTheWeek> DayOfTheWeek { get; set; }
         public virtual DbSet<ProfilePicture> ProfilePicture { get; set; }
         public virtual DbSet<Time> Time { get; set; }
 
@@ -156,18 +156,20 @@ namespace BucBoard.Models.Entities.Existing
                     .HasConstraintName("FK_Course");
             });
 
-            modelBuilder.Entity<DayOfWeek>(entity =>
+            modelBuilder.Entity<DayOfTheWeek>(entity =>
             {
                 entity.Property(e => e.ApplicationUserId)
                     .IsRequired()
                     .HasMaxLength(450);
 
-                entity.Property(e => e.Day).IsRequired();
+                entity.Property(e => e.DayOfTheWeek1)
+                    .IsRequired()
+                    .HasColumnName("DayOfTheWeek");
 
                 entity.HasOne(d => d.ApplicationUser)
-                    .WithMany(p => p.DayOfWeek)
+                    .WithMany(p => p.DayOfTheWeek)
                     .HasForeignKey(d => d.ApplicationUserId)
-                    .HasConstraintName("FK_DayOfWeek");
+                    .HasConstraintName("FK_Day");
             });
 
             modelBuilder.Entity<ProfilePicture>(entity =>
