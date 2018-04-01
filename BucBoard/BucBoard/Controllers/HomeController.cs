@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Net.Mail;
 using System.Net;
 
+
 namespace BucBoard.Controllers
 {
     //son_of_anarchy - change
