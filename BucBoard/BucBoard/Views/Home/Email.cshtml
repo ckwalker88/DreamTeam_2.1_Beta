@@ -5,59 +5,65 @@
 <br />
 <br />
 
-@if(ViewBag.Error != null)
+@if (ViewBag.Error != null)
 {
     <h2>@ViewBag.Error</h2>
 }
-@if(ViewBag.Success != null)
+@if (ViewBag.Success != null)
 {
     <h2>@ViewBag.Success</h2>
 
 }
 
-<h2>Send Me An Email!</h2>
+@if (ViewBag.Success == null)
+{
+    <h2>Send Me An Email!</h2>
 
 
-<form class="form-horizontal" method="post" action="Email">
-    <fieldset>
+    <form class="form-horizontal" method="post" action="Email">
+        <fieldset>
 
-        <!-- Student email form-->
-        <div class="form-group">
-            <label class="col-md-2 control-label" for="textinput">Student Email</label>
-            <div class="col-md-4">
-                <input id="studentEmail" name="studentEmail" type="text" class="form-control input-md" required="">
+            <!-- Student email form-->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="textinput">Student Email</label>
+                <div class="col-md-4">
+                    <input id="studentEmail" name="studentEmail" type="text" class="form-control input-md" required="">
+                </div>
             </div>
-        </div>
 
-        <!-- Email subject form-->
-        <div class="form-group">
-            <label class="col-md-2 control-label" for="textinput">Subject</label>
-            <div class="col-md-4">
-                <input id="emailSubject" name="emailSubject" type="text" placeholder="" class="form-control input-md" required="">
+            <!-- Email subject form-->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="textinput">Subject</label>
+                <div class="col-md-4">
+                    <input id="emailSubject" name="emailSubject" type="text" placeholder="" class="form-control input-md" required="">
 
+                </div>
             </div>
-        </div>
 
-        <!-- Message for email -->
-        <div class="form-group">
-            <label class="col-md-2 control-label" for="textarea">Message</label>
-            <div class="col-md-4">
-                <textarea class="form-control" id="emailMessage" name="emailMessage" style="width:600px; height:200px; resize: none;"></textarea>
+            <!-- Message for email -->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="textarea">Message</label>
+                <div class="col-md-4">
+                    <textarea class="form-control" id="emailMessage" name="emailMessage" style="width:600px; height:200px; resize: none;"></textarea>
+                </div>
             </div>
-        </div>
 
-        <!-- Send button -->
-        <div class="form-group">
-            <label class="col-md-2 control-label" for="sendbutton"></label>
-            <div class="col-md-4">
-                <input id="sendbutton" name="sendbutton" class="btn btn-danger" type="submit" value="Send">
+            <!-- Send button -->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="sendbutton"></label>
+                <div class="col-md-4">
+                    <input id="sendbutton" name="sendbutton" class="btn btn-danger" type="submit" value="Send">
+                </div>
             </div>
-        </div>
 
-    </fieldset>
-</form>
+        </fieldset>
+    </form>
+}
+<br />
+    <div>
+        <a href="~/" class="btn btn-danger">Back to Buc Board</a>
+    </div>
 
-<div>
-    <a href="/home/index">Back to buc board</a>
-</div>
+
+
 

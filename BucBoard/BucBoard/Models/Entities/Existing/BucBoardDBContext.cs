@@ -1,0 +1,206 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+
+namespace BucBoard.Models.Entities.Existing
+{
+    public partial class BucBoardDBContext : DbContext
+    {
+        public virtual DbSet<Announcement> Announcement { get; set; }
+        public virtual DbSet<AspNetRoleClaims> AspNetRoleClaims { get; set; }
+        public virtual DbSet<AspNetRoles> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
+        public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
+        public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
+        public virtual DbSet<Course> Course { get; set; }
+        public virtual DbSet<DayOfWeek> DayOfWeek { get; set; }
+        public virtual DbSet<ProfilePicture> ProfilePicture { get; set; }
+        public virtual DbSet<Time> Time { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer(@"Data Source=bucboard.database.windows.net;Initial Catalog=BucBoardDB;Integrated Security=False;User ID=bucboard18;Password=FyoCouch!;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Announcement>(entity =>
+            {
+                entity.Property(e => e.ApplicationUserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.Announcement)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasConstraintName("FK_ApplicationUserId_AnnouncementID");
+            });
+
+            modelBuilder.Entity<AspNetRoleClaims>(entity =>
+            {
+                entity.HasIndex(e => e.RoleId);
+
+                entity.Property(e => e.RoleId).IsRequired();
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.AspNetRoleClaims)
+                    .HasForeignKey(d => d.RoleId);
+            });
+
+            modelBuilder.Entity<AspNetRoles>(entity =>
+            {
+                entity.HasIndex(e => e.NormalizedName)
+                    .HasName("RoleNameIndex")
+                    .IsUnique()
+                    .HasFilter("([NormalizedName] IS NOT NULL)");
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Name).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedName).HasMaxLength(256);
+            });
+
+            modelBuilder.Entity<AspNetUserClaims>(entity =>
+            {
+                entity.HasIndex(e => e.UserId);
+
+                entity.Property(e => e.UserId).IsRequired();
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserClaims)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<AspNetUserLogins>(entity =>
+            {
+                entity.HasKey(e => new { e.LoginProvider, e.ProviderKey });
+
+                entity.HasIndex(e => e.UserId);
+
+                entity.Property(e => e.UserId).IsRequired();
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserLogins)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<AspNetUserRoles>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.RoleId });
+
+                entity.HasIndex(e => e.RoleId);
+
+                entity.HasOne(d => d.Role)
+                    .WithMany(p => p.AspNetUserRoles)
+                    .HasForeignKey(d => d.RoleId);
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserRoles)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<AspNetUsers>(entity =>
+            {
+                entity.HasIndex(e => e.NormalizedEmail)
+                    .HasName("EmailIndex");
+
+                entity.HasIndex(e => e.NormalizedUserName)
+                    .HasName("UserNameIndex")
+                    .IsUnique()
+                    .HasFilter("([NormalizedUserName] IS NOT NULL)");
+
+                entity.HasIndex(e => e.RolesId);
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Email).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedEmail).HasMaxLength(256);
+
+                entity.Property(e => e.NormalizedUserName).HasMaxLength(256);
+
+                entity.Property(e => e.UserName).HasMaxLength(256);
+
+                entity.HasOne(d => d.Roles)
+                    .WithMany(p => p.AspNetUsers)
+                    .HasForeignKey(d => d.RolesId);
+            });
+
+            modelBuilder.Entity<AspNetUserTokens>(entity =>
+            {
+                entity.HasKey(e => new { e.UserId, e.LoginProvider, e.Name });
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.AspNetUserTokens)
+                    .HasForeignKey(d => d.UserId);
+            });
+
+            modelBuilder.Entity<Course>(entity =>
+            {
+                entity.Property(e => e.ApplicationUserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.CourseCode)
+                    .IsRequired()
+                    .HasColumnType("nchar(10)");
+
+                entity.Property(e => e.CourseName).IsRequired();
+
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.Course)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasConstraintName("FK_Course");
+            });
+
+            modelBuilder.Entity<DayOfWeek>(entity =>
+            {
+                entity.Property(e => e.ApplicationUserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.Day).IsRequired();
+
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.DayOfWeek)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasConstraintName("FK_DayOfWeek");
+            });
+
+            modelBuilder.Entity<ProfilePicture>(entity =>
+            {
+                entity.Property(e => e.ApplicationUserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.ProfilePictureNavigation)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasConstraintName("FK_ApplicationUserId_AppUserID");
+            });
+
+            modelBuilder.Entity<Time>(entity =>
+            {
+                entity.Property(e => e.ApplicationUserId)
+                    .IsRequired()
+                    .HasMaxLength(450);
+
+                entity.Property(e => e.StartTime).HasColumnType("datetime");
+
+                entity.Property(e => e.StopTime).HasColumnType("datetime");
+
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.Time)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasConstraintName("FK_Time");
+            });
+        }
+    }
+}
