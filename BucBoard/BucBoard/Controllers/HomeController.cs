@@ -34,7 +34,15 @@ namespace BucBoard.Controllers
             return View();
         }
 
-        
+
+        /*
+         * Don't fucking touch this or it will break the email send server.
+         * 
+         * Don't modify unless your cucumber leaves bloom scarlet.
+         * 
+         * Love ya - D
+         * 
+         */
 
         [HttpPost]
         public ActionResult Email(string studentEmail, string emailSubject, string emailMessage)
@@ -71,8 +79,8 @@ namespace BucBoard.Controllers
                         smtp.Send(message);
                     }
 
-                    ViewBag.Success = "It works boi";
-                    return RedirectToAction();
+                    ViewBag.Success = "Email succesfully sent.";
+                    return View();
                 }
 
             }
