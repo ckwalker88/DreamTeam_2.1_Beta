@@ -7,40 +7,24 @@ using Microsoft.AspNetCore.Mvc;
 using BucBoard.Models;
 using BucBoard.Services.Interfaces;
 using BucBoard.Models.Entities.Existing;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using BucBoard.Models.ViewModels;
 using System.Net.Mail;
 using System.Net;
 
 namespace BucBoard.Controllers
 {
-    [Authorize(Roles = "SuperAdmin, Admin")]
     public class HomeController : Controller
     {
-        private ICourseRepository _courseRepository;
-        private IAnnouncementRepository _announcementRepo;
-        private UserManager<ApplicationUser> _userManager;
+        private IAnnouncementRepository _repo;
 
-        public HomeController(ICourseRepository courseRepository, IAnnouncementRepository announcementRepo, UserManager<ApplicationUser> userManager)
+        public HomeController(IAnnouncementRepository repo)
         {
-            _courseRepository = courseRepository;
-            _announcementRepo = announcementRepo;
-            _userManager = userManager;
+            _repo = repo;
         }
         public IActionResult Index()
         {
-            ViewBag.UserId = _userManager.GetUserId(HttpContext.User);
-
-            var announcements = _announcementRepo.ReadAllAnnouncements();
-            var query = announcements.Where(a => a.ApplicationUserId == ViewBag.UserId);
-            var model = query.ToList();
-
-            var courses = _courseRepository.ReadAllCourses();
-            var query2 = courses.Where(c => c.ApplicationUserId == ViewBag.UserId);
-            var model2 = query2.ToList();
-
-            ViewBag.courseList = model2;
-            return View(model);
+            return View(_repo.ReadAllAnnouncements());
         }
 
         [HttpGet]
@@ -52,7 +36,7 @@ namespace BucBoard.Controllers
 
 
         /*
-         * Don't touch this or it will break the email send server.
+         * Don't fucking touch this or it will break the email send server.
          * 
          * Don't modify unless your cucumber leaves bloom scarlet.
          * 
@@ -100,7 +84,7 @@ namespace BucBoard.Controllers
                 }
 
             }
-            catch (Exception)
+            catch(Exception)
             {
                 ViewBag.Error = "Wrench in cogs";
             }
