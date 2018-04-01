@@ -36,7 +36,7 @@ namespace BucBoard.Controllers
 
 
         /*
-         * Don't fucking touch this or it will break the email send server.
+         * Don't touch this or it will break the email send server.
          * 
          * Don't modify unless your cucumber leaves bloom scarlet.
          * 
