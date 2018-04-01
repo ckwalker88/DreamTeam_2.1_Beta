@@ -31,7 +31,7 @@ namespace BucBoard.Services
 
         public DayOfTheWeek Read(int id)
         {
-            throw new NotImplementedException();
+            return _db.DayOfTheWeek.FirstOrDefault(d => d.Id == id);
         }
 
         public ICollection<DayOfTheWeek> ReadAll()
