@@ -51,6 +51,7 @@ namespace BucBoard
             services.AddScoped<IAnnouncementRepository, DbAnnouncementRepository>();
             services.AddScoped<ICourseRepository, DbCourseRepository>();
             services.AddScoped<IDayOfTheWeekRepository, DbDayOfTheWeekRepository>();
+            services.AddScoped<ITimeRepository, DbTimeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
