@@ -43,10 +43,58 @@ namespace BucBoard.Controllers
                 _day.Create(day);
                 return RedirectToAction("Index");
             }
-            
+
             return View();
         }
 
-        
+        public IActionResult Edit(int id)
+        {
+            var day = _day.Read(id);
+            if (day == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(day);
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public IActionResult Edit(DayOfTheWeek day)
+        {
+            if (ModelState.IsValid)
+            {
+                _day.Update(day.Id, day);
+                return RedirectToAction("Index");
+            }
+            return View(day);
+        }
+
+        public IActionResult Details(int id)
+        {
+            var day = _day.Read(id);
+            if (day == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(day);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var day = _day.Read(id);
+            if (day == null)
+            {
+                return RedirectToAction("Index");
+            }
+            return View(day);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeleteConfirmed(int id)
+        {
+            _day.Delete(id);
+            return RedirectToAction("Index");
+
+        }
+
     }
 }

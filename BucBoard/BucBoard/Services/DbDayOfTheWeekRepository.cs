@@ -26,7 +26,9 @@ namespace BucBoard.Services
 
         public void Delete(int id)
         {
-            throw new NotImplementedException();
+            DayOfTheWeek day = _db.DayOfTheWeek.Find(id);
+            _db.DayOfTheWeek.Remove(day);
+            _db.SaveChanges();
         }
 
         public DayOfTheWeek Read(int id)
@@ -44,7 +46,8 @@ namespace BucBoard.Services
 
         public void Update(int id, DayOfTheWeek day)
         {
-            throw new NotImplementedException();
+            _db.Entry(day).State = EntityState.Modified;
+            _db.SaveChanges();
         }
     }
 }
