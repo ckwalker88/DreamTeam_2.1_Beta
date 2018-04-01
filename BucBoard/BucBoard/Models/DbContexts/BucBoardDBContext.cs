@@ -188,9 +188,9 @@ namespace BucBoard.Models.Entities.Existing
                     .IsRequired()
                     .HasMaxLength(450);
 
-                entity.Property(e => e.StartTime).HasColumnType("datetime");
+                entity.Property(e => e.StartTime).IsRequired();
 
-                entity.Property(e => e.StopTime).HasColumnType("datetime");
+                entity.Property(e => e.StopTime).IsRequired();
 
                 entity.HasOne(d => d.ApplicationUser)
                     .WithMany(p => p.Time)

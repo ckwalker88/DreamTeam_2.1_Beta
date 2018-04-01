@@ -1,0 +1,69 @@
+﻿@{
+    ViewData["Title"] = "Email";
+}
+
+<br />
+<br />
+
+@if (ViewBag.Error != null)
+{
+    <h2>@ViewBag.Error</h2>
+}
+@if (ViewBag.Success != null)
+{
+    <h2>@ViewBag.Success</h2>
+
+}
+
+@if (ViewBag.Success == null)
+{
+    <h2>Send Me An Email!</h2>
+
+
+    <form class="form-horizontal" method="post" action="Email">
+        <fieldset>
+
+            <!-- Student email form-->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="textinput">Student Email</label>
+                <div class="col-md-4">
+                    <input id="studentEmail" name="studentEmail" type="text" class="form-control input-md" required="">
+                </div>
+            </div>
+
+            <!-- Email subject form-->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="textinput">Subject</label>
+                <div class="col-md-4">
+                    <input id="emailSubject" name="emailSubject" type="text" placeholder="" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+            <!-- Message for email -->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="textarea">Message</label>
+                <div class="col-md-4">
+                    <textarea class="form-control" id="emailMessage" name="emailMessage" style="width:600px; height:200px; resize: none;"></textarea>
+                </div>
+            </div>
+
+            <!-- Send button -->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="sendbutton"></label>
+                <div class="col-md-4">
+                    <input id="sendbutton" name="sendbutton" class="btn btn-danger" type="submit" value="Send">
+                </div>
+            </div>
+
+        </fieldset>
+    </form>
+}
+<br />
+    <div>
+        <a href="~/" class="btn btn-danger">Back to Buc Board</a>
+    </div>
+
+
+
+
