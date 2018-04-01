@@ -19,9 +19,13 @@ namespace BucBoard.Models.Entities.Existing
         public virtual DbSet<ProfilePicture> ProfilePicture { get; set; }
         public virtual DbSet<Time> Time { get; set; }
 
-        public BucBoardDBContext(DbContextOptions<BucBoardDBContext> options)
-            : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            if (!optionsBuilder.IsConfigured)
+            {
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseSqlServer(@"Data Source=bucboard.database.windows.net;Initial Catalog=BucBoardDB;Integrated Security=False;User ID=bucboard18;Password=FyoCouch!;Connect Timeout=60;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
