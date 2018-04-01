@@ -9,6 +9,11 @@
 {
     <h2>@ViewBag.Error</h2>
 }
+@if(ViewBag.Success != null)
+{
+    <h2>@ViewBag.Success</h2>
+
+}
 
 <h2>Send Me An Email!</h2>
 
@@ -28,7 +33,7 @@
         <div class="form-group">
             <label class="col-md-2 control-label" for="textinput">Subject</label>
             <div class="col-md-4">
-                <input id="emailSubject" nameemailSubjectsubject" type="text" placeholder="" class="form-control input-md" required="">
+                <input id="emailSubject" name="emailSubject" type="text" placeholder="" class="form-control input-md" required="">
 
             </div>
         </div>
