@@ -20,12 +20,20 @@ namespace BucBoard.Controllers
     public class HomeController : Controller
     {
         private ICourseRepository _courseRepository;
+        private IDayOfTheWeekRepository _dayOfTheWeekRepository;
+        private ITimeRepository _timeRepository;
         private IAnnouncementRepository _announcementRepo;
         private UserManager<ApplicationUser> _userManager;
 
-        public HomeController(ICourseRepository courseRepository, IAnnouncementRepository announcementRepo, UserManager<ApplicationUser> userManager)
+        public HomeController(ICourseRepository courseRepository, 
+                              IDayOfTheWeekRepository dayOfTheWeekRepository,
+                              ITimeRepository timeRepository,
+                              IAnnouncementRepository announcementRepo, 
+                              UserManager<ApplicationUser> userManager)
         {
             _courseRepository = courseRepository;
+            _dayOfTheWeekRepository = dayOfTheWeekRepository;
+            _timeRepository = timeRepository;
             _announcementRepo = announcementRepo;
             _userManager = userManager;
         }
@@ -41,7 +49,17 @@ namespace BucBoard.Controllers
             var query2 = courses.Where(c => c.ApplicationUserId == ViewBag.UserId);
             var model2 = query2.ToList();
 
+            var days = _dayOfTheWeekRepository.ReadAll();
+            var query3 = days.Where(c => c.ApplicationUserId == ViewBag.UserId);
+            var model3 = query3.ToList();
+
+            var times = _timeRepository.ReadAllTime();
+            var query4 = times.Where(c => c.ApplicationUserId == ViewBag.UserId);
+            var model4 = query4.ToList();
+
             ViewBag.courseList = model2;
+            ViewBag.dayList = model3;
+            ViewBag.timeList = model4;
             return View(model);
         }
 
