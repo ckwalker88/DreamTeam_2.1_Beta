@@ -46,6 +46,11 @@ namespace BucBoard.Controllers
         [TempData]
         public string StatusMessage { get; set; }
 
+        public ActionResult Splash()
+        {
+            return View();
+        }
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
