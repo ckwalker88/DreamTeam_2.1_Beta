@@ -21,7 +21,7 @@ namespace BucBoard.Models.Entities.Existing
         public virtual DbSet<Time> Time { get; set; }
 
         public BucBoardDBContext(DbContextOptions<BucBoardDBContext> options)
-            : base(options)
+                    : base(options)
         {
         }
 

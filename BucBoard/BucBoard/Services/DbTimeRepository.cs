@@ -4,14 +4,12 @@ using BucBoard.Models.Entities.Existing;
 using BucBoard.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BucBoard.Services
 {
-	public class DbTimeRepository : ITimeRepository
+    public class DbTimeRepository : ITimeRepository
 	{
 
 		private BucBoardDBContext _db;
