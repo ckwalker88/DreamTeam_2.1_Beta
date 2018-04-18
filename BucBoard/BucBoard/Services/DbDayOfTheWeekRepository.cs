@@ -1,10 +1,8 @@
 ﻿using BucBoard.Models.Entities.Existing;
 using BucBoard.Services.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BucBoard.Services
 {
@@ -38,9 +36,9 @@ namespace BucBoard.Services
 
         public ICollection<DayOfTheWeek> ReadAll()
         {
-            return _db.DayOfTheWeek.
-                Include(u => u.ApplicationUser)
-                .Include(r => r.ApplicationUser.Roles)
+            return _db.DayOfTheWeek
+                //Include(u => u.ApplicationUser)
+                //.Include(r => r.ApplicationUser.Roles)
                 .ToList();
         }
 

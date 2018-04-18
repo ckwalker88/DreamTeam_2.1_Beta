@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BucBoard.Models;
 using BucBoard.Services.Interfaces;
-using BucBoard.Models.Entities.Existing;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Mail;
@@ -45,22 +42,27 @@ namespace BucBoard.Controllers
             var query = announcements.Where(a => a.ApplicationUserId == ViewBag.UserId);
             var model = query.ToList();
 
-            var courses = _courseRepository.ReadAllCourses();
-            var query2 = courses.Where(c => c.ApplicationUserId == ViewBag.UserId);
-            var model2 = query2.ToList();
+            //var courses = _courseRepository.ReadAllCourses();
+            //var query2 = courses.Where(c => c.ApplicationUserId == ViewBag.UserId);
+            //var model2 = query2.ToList();
 
-            var days = _dayOfTheWeekRepository.ReadAll();
-            var query3 = days.Where(c => c.ApplicationUserId == ViewBag.UserId);
-            var model3 = query3.ToList();
+            //var days = _dayOfTheWeekRepository.ReadAll();
+            //var query3 = days.Where(c => c.ApplicationUserId == ViewBag.UserId);
+            //var model3 = query3.ToList();
 
-            var times = _timeRepository.ReadAllTime();
-            var query4 = times.Where(c => c.ApplicationUserId == ViewBag.UserId);
-            var model4 = query4.ToList();
+            //var times = _timeRepository.ReadAllTime();
+            //var query4 = times.Where(c => c.ApplicationUserId == ViewBag.UserId);
+            //var model4 = query4.ToList();
 
-            ViewBag.courseList = model2;
-            ViewBag.dayList = model3;
-            ViewBag.timeList = model4;
-            return View(model);
+
+
+
+
+            //ViewBag.courseList = model2;
+            //ViewBag.dayList = model3;
+            //ViewBag.timeList = model4;
+            //return View(model);
+            return View();
         }
 
         [HttpGet]

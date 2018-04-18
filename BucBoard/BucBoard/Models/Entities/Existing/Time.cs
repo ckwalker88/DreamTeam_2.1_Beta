@@ -8,8 +8,8 @@ namespace BucBoard.Models.Entities.Existing
         public int Id { get; set; }
         public string StartTime { get; set; }
         public string StopTime { get; set; }
-        public string ApplicationUserId { get; set; }
+        public int ScheduleId { get; set; }
 
-        public AspNetUsers ApplicationUser { get; set; }
+        public Schedule Schedule { get; set; }
     }
 }

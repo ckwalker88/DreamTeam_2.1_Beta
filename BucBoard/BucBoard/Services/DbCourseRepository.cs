@@ -1,13 +1,8 @@
-﻿using BucBoard.Data;
-using BucBoard.Models;
-using BucBoard.Models.Entities.Existing;
+﻿using BucBoard.Models.Entities.Existing;
 using BucBoard.Services.Interfaces;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace BucBoard.Services
 {
@@ -35,8 +30,8 @@ namespace BucBoard.Services
         public ICollection<Course> ReadAllCourses()
         {
             return _db.Course
-                .Include(u => u.ApplicationUser)
-                .Include(r => r.ApplicationUser.Roles)
+                //.Include(u => u.ApplicationUser)
+                //.Include(r => r.ApplicationUser.Roles)
                 .ToList();
         }
         public void UpdateCourse(int id, Course course)

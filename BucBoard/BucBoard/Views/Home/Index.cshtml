@@ -3,210 +3,6 @@
 
 @{
     ViewData["Title"] = "Home Page";
-    var courseList = (ViewBag.courseList as ICollection<Course>);
-    var dayList = (ViewBag.dayList as ICollection<DayOfTheWeek>);
-    var timeList = (ViewBag.timeList as ICollection<Time>);
-
-    Time[] times = new Time[timeList.Count];
-    timeList.CopyTo(times, 0);
-    string startTime1 = "";
-    string stopTime1 = "";
-    string startTime2 = "";
-    string stopTime2 = "";
-    string startTime3 = "";
-    string stopTime3 = "";
-    string startTime4 = "";
-    string stopTime4 = "";
-    string startTime5 = "";
-    string stopTime5 = "";
-    string startTime6 = "";
-    string stopTime6 = "";
-
-    DayOfTheWeek[] daysOfTheWeek = new DayOfTheWeek[dayList.Count];
-    dayList.CopyTo(daysOfTheWeek, 0);
-    string day1 = "";
-    string day2 = "";
-    string day3 = "";
-    string day4 = "";
-    string day5 = "";
-    string day6 = "";
-
-    Course[] courses = new Course[courseList.Count];
-    courseList.CopyTo(courses, 0);
-    string courseCode1 = "";
-    string courseNumber1 = "";
-    string courseCode2 = "";
-    string courseNumber2 = "";
-    string courseCode3 = "";
-    string courseNumber3 = "";
-    string courseCode4 = "";
-    string courseNumber4 = "";
-    string courseCode5 = "";
-    string courseNumber5 = "";
-    string courseCode6 = "";
-    string courseNumber6 = "";
-
-    Announcement[] announcements = new Announcement[Model.Count];
-    Model.CopyTo(announcements, 0);
-    string message1 = "";
-    string message2 = "";
-    string message3 = "";
-    string message4 = "";
-    string message5 = "";
-    string message6 = "";
-    string message7 = "";
-    string message8 = "";
-
-
-    if (timeList.Count >= 1)
-    {
-        startTime1 = times[times.Length - 1].StartTime;
-        stopTime1 = times[times.Length - 1].StopTime;
-    }
-
-    if (timeList.Count >= 2)
-    {
-        startTime2 = times[times.Length - 2].StartTime;
-        stopTime2 = times[times.Length - 2].StopTime;
-    }
-
-    if (timeList.Count >= 3)
-    {
-        startTime3 = times[times.Length - 3].StartTime;
-        stopTime3 = times[times.Length - 3].StopTime;
-    }
-
-    if (timeList.Count >= 4)
-    {
-        startTime4 = times[times.Length - 4].StartTime;
-        stopTime4 = times[times.Length - 4].StopTime;
-    }
-
-    if (timeList.Count >= 5)
-    {
-        startTime5 = times[times.Length - 5].StartTime;
-        stopTime5 = times[times.Length - 5].StopTime;
-    }
-
-    if (timeList.Count >= 6)
-    {
-        startTime6 = times[times.Length - 6].StartTime;
-        stopTime6 = times[times.Length - 6].StopTime;
-    }
-
-    if (dayList.Count >= 1)
-    {
-        day1 = daysOfTheWeek[daysOfTheWeek.Length - 1].DayOfTheWeek1;
-    }
-
-    if (dayList.Count >= 2)
-    {
-        day2 = daysOfTheWeek[daysOfTheWeek.Length - 2].DayOfTheWeek1;
-    }
-
-    if (dayList.Count >= 3)
-    {
-        day3 = daysOfTheWeek[daysOfTheWeek.Length - 3].DayOfTheWeek1;
-    }
-
-    if (dayList.Count >= 4)
-    {
-        day4 = daysOfTheWeek[daysOfTheWeek.Length - 4].DayOfTheWeek1;
-    }
-
-    if (dayList.Count >= 5)
-    {
-        day5 = daysOfTheWeek[daysOfTheWeek.Length - 5].DayOfTheWeek1;
-    }
-
-    if (dayList.Count >= 6)
-    {
-        day6 = daysOfTheWeek[daysOfTheWeek.Length - 6].DayOfTheWeek1;
-    }
-
-
-
-    if (courseList.Count >= 1)
-    {
-        courseCode1 = courses[courses.Length - 1].CourseCode.Trim();
-        courseNumber1 = courses[courses.Length - 1].CourseNumber.ToString();
-    }
-
-    if (courseList.Count >= 2)
-    {
-        courseCode2 = courses[courses.Length - 2].CourseCode.Trim();
-        courseNumber2 = courses[courses.Length - 2].CourseNumber.ToString();
-    }
-
-    if (courseList.Count >= 3)
-    {
-        courseCode3 = courses[courses.Length - 3].CourseCode.Trim();
-        courseNumber3 = courses[courses.Length - 3].CourseNumber.ToString();
-    }
-
-    if (courseList.Count >= 4)
-    {
-        courseCode4 = courses[courses.Length - 4].CourseCode.Trim();
-        courseNumber4 = courses[courses.Length - 4].CourseNumber.ToString();
-    }
-
-    if (courseList.Count >= 5)
-    {
-        courseCode5 = courses[courses.Length - 5].CourseCode.Trim();
-        courseNumber5 = courses[courses.Length - 5].CourseNumber.ToString();
-    }
-
-    if (courseList.Count >= 6)
-    {
-        courseCode6 = courses[courses.Length - 6].CourseCode.Trim();
-        courseNumber6 = courses[courses.Length - 6].CourseNumber.ToString();
-    }
-
-
-
-
-
-
-
-    if (Model.Count >= 1)
-    {
-        message1 = announcements[announcements.Length - 1].Message;
-    }
-
-    if (Model.Count >= 2)
-    {
-        message2 = announcements[announcements.Length - 2].Message;
-    }
-
-    if (Model.Count >= 3)
-    {
-        message3 = announcements[announcements.Length - 3].Message;
-    }
-
-    if (Model.Count >= 4)
-    {
-        message4 = announcements[announcements.Length - 4].Message;
-    }
-
-    if (Model.Count >= 5)
-    {
-        message5 = announcements[announcements.Length - 5].Message;
-    }
-
-    if (Model.Count >= 6)
-    {
-        message6 = announcements[announcements.Length - 6].Message;
-    }
-
-    if (Model.Count >= 7)
-    {
-        message7 = announcements[announcements.Length - 7].Message;
-    }
-
-    if (Model.Count >= 8)
-    {
-        message8 = announcements[announcements.Length - 8].Message;
-    }
 }
 <!--
     <div style="background-color:#041e42; color:lightgray;">
@@ -253,34 +49,34 @@
                 <th>Times</th>
             </tr>
             <tr>
-                <td>@courseCode1  @courseNumber1</td>
-                <td>@day1</td>
-                <td>@startTime1 @stopTime1</td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
-                <td>@courseCode2 @courseNumber2</td>
-                <td>@day2</td>
-                <td>@startTime2 @stopTime2</td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
-                <td>@courseCode3 @courseNumber3</td>
-                <td>@day3</td>
-                <td>@startTime3 @stopTime3</td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
-                <td>@courseCode4 @courseNumber4</td>
-                <td>@day4</td>
-                <td>@startTime4 @stopTime4</td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
-                <td>@courseCode5  @courseNumber5</td>
-                <td>@day5</td>
-                <td>@startTime5  @stopTime5</td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
-                <td>@courseCode6 @courseNumber6</td>
-                <td>@day6</td>
-                <td>@startTime6  @stopTime6</td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
         </table>
     </div>
@@ -298,28 +94,6 @@
     <h1 style="text-align:center;">Announcements</h1>
     <div style="text-align:center;">
         <textarea rows="23" cols="50" style="color:black;">
-        @message1
-
-
-        @message2
-
-
-        @message3
-
-        
-        @message4
-
-
-        @message5
-
-
-        @message6
-
-
-        @message7
-
-
-        @message8
         </textarea>
     </div>
     <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />

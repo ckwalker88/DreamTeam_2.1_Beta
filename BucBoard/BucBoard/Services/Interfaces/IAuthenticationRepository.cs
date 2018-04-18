@@ -1,12 +1,8 @@
 ﻿
 using BucBoard.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BucBoard.Models.Entities.Existing;
+using Microsoft.AspNetCore.Identity;
+using System.Linq;
 
 namespace BucBoard.Services.Interfaces
 {
