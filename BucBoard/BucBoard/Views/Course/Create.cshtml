@@ -12,8 +12,6 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input asp-for="ApplicationUserId" input type="hidden" value="@ViewBag.userId" form-control" />
-            <span asp-validation-for="ApplicationUserId" class="text-danger"></span>
             <div class="form-group">
                 <label asp-for="CourseCode" class="control-label"></label>
                 <input asp-for="CourseCode" class="form-control" />
