@@ -17,6 +17,7 @@ namespace BucBoard.Models.Entities.Existing
         public virtual DbSet<Course> Course { get; set; }
         public virtual DbSet<DayOfTheWeek> DayOfTheWeek { get; set; }
         public virtual DbSet<ProfilePicture> ProfilePicture { get; set; }
+        public virtual DbSet<Schedule> Schedule { get; set; }
         public virtual DbSet<Time> Time { get; set; }
 
         public BucBoardDBContext(DbContextOptions<BucBoardDBContext> options)
@@ -140,35 +141,27 @@ namespace BucBoard.Models.Entities.Existing
 
             modelBuilder.Entity<Course>(entity =>
             {
-                entity.Property(e => e.ApplicationUserId)
-                    .IsRequired()
-                    .HasMaxLength(450);
-
                 entity.Property(e => e.CourseCode)
                     .IsRequired()
                     .HasColumnType("nchar(10)");
 
                 entity.Property(e => e.CourseName).IsRequired();
 
-                entity.HasOne(d => d.ApplicationUser)
+                entity.HasOne(d => d.Schedule)
                     .WithMany(p => p.Course)
-                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasForeignKey(d => d.ScheduleId)
                     .HasConstraintName("FK_Course");
             });
 
             modelBuilder.Entity<DayOfTheWeek>(entity =>
             {
-                entity.Property(e => e.ApplicationUserId)
-                    .IsRequired()
-                    .HasMaxLength(450);
-
                 entity.Property(e => e.DayOfTheWeek1)
                     .IsRequired()
                     .HasColumnName("DayOfTheWeek");
 
-                entity.HasOne(d => d.ApplicationUser)
+                entity.HasOne(d => d.Schedule)
                     .WithMany(p => p.DayOfTheWeek)
-                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasForeignKey(d => d.ScheduleId)
                     .HasConstraintName("FK_Day");
             });
 
@@ -184,19 +177,24 @@ namespace BucBoard.Models.Entities.Existing
                     .HasConstraintName("FK_ApplicationUserId_AppUserID");
             });
 
-            modelBuilder.Entity<Time>(entity =>
+            modelBuilder.Entity<Schedule>(entity =>
             {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
                 entity.Property(e => e.ApplicationUserId)
                     .IsRequired()
                     .HasMaxLength(450);
+            });
 
+            modelBuilder.Entity<Time>(entity =>
+            {
                 entity.Property(e => e.StartTime).IsRequired();
 
                 entity.Property(e => e.StopTime).IsRequired();
 
-                entity.HasOne(d => d.ApplicationUser)
+                entity.HasOne(d => d.Schedule)
                     .WithMany(p => p.Time)
-                    .HasForeignKey(d => d.ApplicationUserId)
+                    .HasForeignKey(d => d.ScheduleId)
                     .HasConstraintName("FK_Time");
             });
         }

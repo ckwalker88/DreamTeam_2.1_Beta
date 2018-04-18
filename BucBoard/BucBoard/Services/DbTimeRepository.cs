@@ -50,8 +50,8 @@ namespace BucBoard.Services
 		public ICollection<Time> ReadAllTime()
 		{
 			return _db.Time
-				.Include(u => u.ApplicationUser)
-				.Include(r => r.ApplicationUser.Roles)
+				//.Include(u => u.ApplicationUser)
+				//.Include(r => r.ApplicationUser.Roles)
 				.ToList();
 		}
 

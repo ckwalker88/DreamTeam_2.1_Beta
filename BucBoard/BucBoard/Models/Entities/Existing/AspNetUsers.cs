@@ -12,10 +12,7 @@ namespace BucBoard.Models.Entities.Existing
             AspNetUserLogins = new HashSet<AspNetUserLogins>();
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
             AspNetUserTokens = new HashSet<AspNetUserTokens>();
-            Course = new HashSet<Course>();
-            DayOfTheWeek = new HashSet<DayOfTheWeek>();
             ProfilePictureNavigation = new HashSet<ProfilePicture>();
-            Time = new HashSet<Time>();
         }
 
         public string Id { get; set; }
@@ -47,9 +44,6 @@ namespace BucBoard.Models.Entities.Existing
         public ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
         public ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
-        public ICollection<Course> Course { get; set; }
-        public ICollection<DayOfTheWeek> DayOfTheWeek { get; set; }
         public ICollection<ProfilePicture> ProfilePictureNavigation { get; set; }
-        public ICollection<Time> Time { get; set; }
     }
 }

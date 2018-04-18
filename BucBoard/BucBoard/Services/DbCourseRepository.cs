@@ -35,8 +35,8 @@ namespace BucBoard.Services
         public ICollection<Course> ReadAllCourses()
         {
             return _db.Course
-                .Include(u => u.ApplicationUser)
-                .Include(r => r.ApplicationUser.Roles)
+                //.Include(u => u.ApplicationUser)
+                //.Include(r => r.ApplicationUser.Roles)
                 .ToList();
         }
         public void UpdateCourse(int id, Course course)

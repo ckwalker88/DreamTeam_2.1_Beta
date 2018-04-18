@@ -11,7 +11,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Mail;
 using System.Net;
-
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace BucBoard.Controllers
 {
@@ -46,21 +47,41 @@ namespace BucBoard.Controllers
             var model = query.ToList();
 
             var courses = _courseRepository.ReadAllCourses();
-            var query2 = courses.Where(c => c.ApplicationUserId == ViewBag.UserId);
-            var model2 = query2.ToList();
+            //var query2 = courses.Where(c => c.ApplicationUserId == ViewBag.UserId);
+            //var model2 = query2.ToList();
 
             var days = _dayOfTheWeekRepository.ReadAll();
-            var query3 = days.Where(c => c.ApplicationUserId == ViewBag.UserId);
-            var model3 = query3.ToList();
+            //var query3 = days.Where(c => c.ApplicationUserId == ViewBag.UserId);
+            //var model3 = query3.ToList();
 
             var times = _timeRepository.ReadAllTime();
-            var query4 = times.Where(c => c.ApplicationUserId == ViewBag.UserId);
-            var model4 = query4.ToList();
+            //var query4 = times.Where(c => c.ApplicationUserId == ViewBag.UserId);
+            //var model4 = query4.ToList();
 
-            ViewBag.courseList = model2;
-            ViewBag.dayList = model3;
-            ViewBag.timeList = model4;
+            //ViewBag.courseList = model2;
+            //ViewBag.dayList = model3;
+            //ViewBag.timeList = model4;
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UploadProfilePic(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return Content("File not selected");
+            }
+
+            var path = Path.Combine(
+                Directory.GetCurrentDirectory(), "wwwroot",
+                file.Name);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

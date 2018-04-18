@@ -38,9 +38,9 @@ namespace BucBoard.Services
 
         public ICollection<DayOfTheWeek> ReadAll()
         {
-            return _db.DayOfTheWeek.
-                Include(u => u.ApplicationUser)
-                .Include(r => r.ApplicationUser.Roles)
+            return _db.DayOfTheWeek
+                //Include(u => u.ApplicationUser)
+                //.Include(r => r.ApplicationUser.Roles)
                 .ToList();
         }
 
