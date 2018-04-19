@@ -10,6 +10,8 @@ using BucBoard.Services;
 using Microsoft.Extensions.Logging;
 using BucBoard.Services.Interfaces;
 using BucBoard.Models.Entities.Existing;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace BucBoard
 {
@@ -48,6 +50,11 @@ namespace BucBoard
             services.AddScoped<ICourseRepository, DbCourseRepository>();
             services.AddScoped<IDayOfTheWeekRepository, DbDayOfTheWeekRepository>();
             services.AddScoped<ITimeRepository, DbTimeRepository>();
+            services.AddScoped<IProfilePictureRepository, DbProfilePictureRepository>();
+
+            services.AddSingleton<IFileProvider>(
+                new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

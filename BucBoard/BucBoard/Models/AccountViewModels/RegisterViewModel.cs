@@ -31,5 +31,7 @@ namespace BucBoard.Models.AccountViewModels
         [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+
     }
 }
