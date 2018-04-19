@@ -25,18 +25,25 @@ namespace BucBoard.Controllers
         private ITimeRepository _timeRepository;
         private IAnnouncementRepository _announcementRepo;
         private UserManager<ApplicationUser> _userManager;
+        private IProfilePictureRepository _pic;
+        private IAuthenticationRepository _user;
 
-        public HomeController(ICourseRepository courseRepository, 
+        public HomeController(ICourseRepository courseRepository,
                               IDayOfTheWeekRepository dayOfTheWeekRepository,
                               ITimeRepository timeRepository,
-                              IAnnouncementRepository announcementRepo, 
-                              UserManager<ApplicationUser> userManager)
+                              IAnnouncementRepository announcementRepo,
+                              UserManager<ApplicationUser> userManager,
+                              IProfilePictureRepository pic,
+                              IAuthenticationRepository user)
         {
             _courseRepository = courseRepository;
             _dayOfTheWeekRepository = dayOfTheWeekRepository;
             _timeRepository = timeRepository;
             _announcementRepo = announcementRepo;
             _userManager = userManager;
+            _pic = pic;
+            _user = user;
+           
         }
         public IActionResult Index()
         {
@@ -58,14 +65,62 @@ namespace BucBoard.Controllers
             //var query4 = times.Where(c => c.ApplicationUserId == ViewBag.UserId);
             //var model4 = query4.ToList();
 
-            //ViewBag.courseList = model2;
-            //ViewBag.dayList = model3;
-            //ViewBag.timeList = model4;
-            return View(model);
+            var pics = _pic.SeeAllPictures();
+            
+            try
+            {
+                var userPic = pics.Where(p => p.ApplicationUserId == ViewBag.UserId).FirstOrDefault().Picture;
+            
+                var userName = _userManager.GetUserName(HttpContext.User);
+                var users = _user.ReadAllUsers();
+                var user = _user.Read(_userManager.GetUserId(HttpContext.User));
+                var profName = user.FirstName + " " + user.LastName;
+                //var name = users.Where(u => u.Id == ViewBag.UserId).F
+                //var model5 = userPic.ToList();
+
+                //var datPic = pics.
+
+
+                string convertToBase64 = Convert.ToBase64String(userPic);
+                string imgDataURL = string.Format("data:image/png;base64,{0}", convertToBase64);
+
+                ViewBag.DisplayImage = imgDataURL;
+                ViewBag.UserName = userName;
+                ViewBag.DisplayName = profName;
+
+                    //ViewBag.courseList = model2;
+                    //ViewBag.dayList = model3;
+                    //ViewBag.timeList = model4;
+                    //ViewBag.userPictures = model5;
+                    //ViewBag.profPic = userPic; 
+
+                }
+                catch (Exception)
+                {
+                    string imgPath = $"{Directory.GetCurrentDirectory()}{@"\wwwroot\images\avatar.png"}";
+                    byte[] byteData = System.IO.File.ReadAllBytes(imgPath);
+                    string base64data = Convert.ToBase64String(byteData);
+                    string imgDataURL = string.Format("data:image/png;base64,{0}", base64data);
+                    ViewBag.DisplayImage = imgDataURL;
+
+                    var userName = _userManager.GetUserName(HttpContext.User);
+                    var users = _user.ReadAllUsers();
+                    var user = _user.Read(_userManager.GetUserId(HttpContext.User));
+                    var profName = user.FirstName + " " + user.LastName;
+
+                    ViewBag.UserName = userName;
+                    ViewBag.DisplayName = profName;
+
+            }
+                return View(model);
+
         }
 
+        /*
+         * We could use this later for uploading files if we needed to
+         */ 
         [HttpPost]
-        public async Task<IActionResult> UploadProfilePic(IFormFile file)
+        public async Task<IActionResult> UploadFile(IFormFile file)
         {
             if (file == null || file.Length == 0)
             {

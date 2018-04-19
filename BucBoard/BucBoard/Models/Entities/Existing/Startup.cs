@@ -50,6 +50,7 @@ namespace BucBoard
             services.AddScoped<ICourseRepository, DbCourseRepository>();
             services.AddScoped<IDayOfTheWeekRepository, DbDayOfTheWeekRepository>();
             services.AddScoped<ITimeRepository, DbTimeRepository>();
+            services.AddScoped<IProfilePictureRepository, DbProfilePictureRepository>();
 
             services.AddSingleton<IFileProvider>(
                 new PhysicalFileProvider(

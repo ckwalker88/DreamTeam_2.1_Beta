@@ -1,0 +1,34 @@
+﻿@model BucBoard.Models.Entities.Existing.ProfilePicture
+
+@{
+    ViewData["Title"] = "DeleteConfirmed";
+}
+
+<h2>DeleteConfirmed</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>ProfilePicture</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Picture)
+        </dt>
+        <dd>
+            @*@Html.DisplayFor(model => model.Picture)*@
+            <img src="@ViewBag.DisplayImage" alt="Prof" style="width: 200px; height: 200px; margin: auto;" />
+        </dd>
+        @*<dt>
+            @Html.DisplayNameFor(model => model.ApplicationUser)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApplicationUser.Id)
+        </dd>*@
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index" class="btn btn-info">Back to List</a>
+    </form>
+</div>

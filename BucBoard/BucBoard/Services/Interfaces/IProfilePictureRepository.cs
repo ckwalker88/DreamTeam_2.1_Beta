@@ -1,4 +1,5 @@
 ﻿using BucBoard.Models.Entities.Existing;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,8 +9,10 @@ namespace BucBoard.Services.Interfaces
 {
     public interface IProfilePictureRepository
     {
-        ProfilePicture UploadPicture(ProfilePicture picture);
+        ProfilePicture UploadPicture(ProfilePicture data);
         ICollection<ProfilePicture> SeeAllPictures();
-
+        ProfilePicture GetPic(int id);
+        void UpdatePicture(int id, ProfilePicture picture);
+        void DeletePicture(int id);
     }
 }

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<BucBoard.Models.Entities.Existing.ProfilePicture>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<figure>
+    <p>
+        <a asp-action="Create" class="btn btn-sm btn-info">Upload New</a>
+    </p>
+    <figcaption>**Note: You may only have 1 profile picture at a time.<br />Delete Your old picture first, then upload a new one**</figcaption>
+</figure>
+
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Picture)
+                </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.ApplicationUser)
+            </th>*@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Picture) 
+            </td>*@
+            <td>
+                <img src="@ViewBag.DisplayImage" alt="Prof" style="width: 200px; height: 200px; margin: auto;"/>
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ApplicationUser.Id)
+            </td>*@
+            <td>
+                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+                @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                
+            </td>
+        </tr>
+}
+    </tbody>
+
+</table>
+<div>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-info">Back to Homepage</a>
+</div>
+
+
