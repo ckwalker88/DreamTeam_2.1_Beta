@@ -1,0 +1,66 @@
+﻿@model IEnumerable<BucBoard.Models.ViewModels.ScheduleViewModel>
+
+@{
+    ViewData["Title"] = "Schedule Index";
+}
+
+<h2>Schedule Index</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseCode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CourseName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DayOfTheWeek1)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartTime)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StopTime)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model)
+{
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CourseName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DayOfTheWeek1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StopTime)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ScheduleId" class="btn btn-warning">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.ScheduleId" class="btn btn-danger">Delete</a>
+        </tr>
+        }
+    </tbody>
+</table>
+<a href="~/Manage/Splash" class="btn btn-danger">Back to toolbox</a>
+<a asp-controller="Home" asp-action="Index" class="btn btn-info">Back to Home Page</a>

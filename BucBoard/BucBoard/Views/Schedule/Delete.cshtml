@@ -1,0 +1,57 @@
+﻿@model BucBoard.Models.ViewModels.ScheduleViewModel
+
+@{
+    ViewData["Title"] = "Delete";
+    Html.AntiForgeryToken();
+}
+
+<h2>Delete</h2>
+
+<h3>Schedule Item</h3>
+<h4>Are you sure you want to delete this schedule item?</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseCode):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CourseCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseNumber):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CourseNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CourseName):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CourseName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.DayOfTheWeek1):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.DayOfTheWeek1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StartTime):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StartTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StopTime):
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StopTime)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete" asp-route-id="@Model.ScheduleId">
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-info">Back to Manage Schedule Items</a>
+    </form>
+</div>
