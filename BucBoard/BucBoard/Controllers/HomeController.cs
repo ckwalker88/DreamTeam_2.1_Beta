@@ -146,7 +146,6 @@ namespace BucBoard.Controllers
             return View();
         }
 
-
         /*
          * Don't touch this or it will break the email send server.
          * 
@@ -157,20 +156,30 @@ namespace BucBoard.Controllers
          */
 
         [HttpPost]
-        public ActionResult Email(string studentEmail, string emailSubject, string emailMessage)
-        {
-
+        public ActionResult Email(string appointment, string studentEmail, string emailSubject, string emailMessage)
+        {   
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var senderemail = new MailAddress("bucboardlistserv@gmail.com", "Buc Board"); // this is the sender, ill make a dummy email instead of what's here
-                    var receiveremail = new MailAddress("chaseday95@gmail.com", "Receiver"); // this is who receives the email, will probably be the professor's email.
+                    var senderemail = new MailAddress("bucboardlistserv@gmail.com", "Buc Board"); // this is the sender
+                    var receiveremail = new MailAddress(User.Identity.Name, "Receiver"); // this is who receives the email, will probably be the professor's email.
 
                     var password = "PussyFucker69#Dongs"; // test email's password
-                    var sub = "Buc Board Email - From: " + studentEmail + " " + emailSubject; //  this is the subject line
-                    var body = emailMessage; // obvious
 
+                    var sub ="";
+                    var body ="";
+
+                    if (appointment == "on")
+                    {
+                        sub = "Buc Board Appointment Request - From: " + studentEmail + " " + emailSubject; //  this is the subject line
+                        body = "\n\n\nThis student would like to schedule an appointment with you!\n\n" + emailMessage; // obvious
+                    }
+                    else
+                    {
+                        sub = "Buc Board Email - From: " + studentEmail + " " + emailSubject; //  this is the subject line
+                        body = emailMessage; // obvious
+                    }
                     var smtp = new SmtpClient // setup the SMTP client here
                     {
                         Host = "smtp.gmail.com",

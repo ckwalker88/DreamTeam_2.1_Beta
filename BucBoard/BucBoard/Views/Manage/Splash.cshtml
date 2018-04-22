@@ -1,9 +1,9 @@
-﻿
-@{
-    ViewData["Title"] = "Splash";
+﻿@{
+    ViewData["Title"] = "Tool Box";
 }
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 <style>
     th {
@@ -11,7 +11,13 @@
         text-align: center
     }
 </style>
+
+<div>
+    <a href="~/" class="btn btn-danger">Back to Buc Board</a>
+</div>
 <br /><br />
+
+
 <div style="font-size:20px; margin:auto; border:groove; padding: 20px; color:#f9f9f9;">
     <table style="width:100%; border-radius:25px;">
         <tr>
@@ -31,11 +37,30 @@
                 <a href="~/Announcement/Index"><i class="fa fa-bullhorn" style="font-size:128px; color:#f9f9f9"></i></a> <!-- announcements settings-->
             </th>
             <th>
-                <a href="~/ProfilePicture/Index"><i class="fa fa-camera" style="font-size:128px; color:#f9f9f9"></i></a> <!-- announcements settings-->
+                <a href="~/ProfilePicture/Index"><i class="fa fa-camera" style="font-size:128px; color:#f9f9f9"></i></a> <!-- profile picture settings-->
             </th>
-
         </tr>
     </table>
 </div>
-<br /><br /><br /><br /><br /><br />
+
+
+<br />
+<div style="float:right">
+    <h2>Logout</h2>
+    <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm">
+        <button type="submit" class="btn btn-link navbar-btn navbar-link"><i class="fa fa-sign-out" style="font-size:128px; color:#f9f9f9"></i></button> <!-- logout button-->
+    </form>
+    
+</div>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br /><br />
+<br /><br />
+<br /><br />
+<br />
+
 

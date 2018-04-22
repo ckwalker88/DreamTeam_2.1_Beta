@@ -1,9 +1,10 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+
+@{
     ViewData["Title"] = "Email";
+    ViewBag.Email = User.Identity.Name;
 }
 
-<br />
-<br />
 
 @if (ViewBag.Error != null)
 {
@@ -13,21 +14,28 @@
 {
     <h2>@ViewBag.Success</h2>
 
+
 }
 
 @if (ViewBag.Success == null)
 {
-    <h2>Send Me An Email!</h2>
+    <h2 style="text-align:center;">Send Me An Email!</h2>
 
 
     <form class="form-horizontal" method="post" action="Email">
         <fieldset>
 
+            <div class="checkbox"style="text-align:center">
+                <h2><label><input type="checkbox" id="appointment" name="appointment" style="transform: scale(4)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Appointment <br />Please indicate in your message when you would like to meet</label></h2>
+            </div>
+            
+            <br /><br />
             <!-- Student email form-->
             <div class="form-group">
                 <label class="col-md-2 control-label" for="textinput">Student Email</label>
                 <div class="col-md-4">
-                    <input id="studentEmail" name="studentEmail" type="text" class="form-control input-md" required="">
+                    <input id="studentEmail" name="studentEmail" type="text" class="form-control input-md" required="" pattern=".+@("@")etsu.edu" 
+                           title="Use a valid student email address. student@etsu.edu" />
                 </div>
             </div>
 
@@ -60,9 +68,9 @@
     </form>
 }
 <br />
-    <div>
-        <a href="~/" class="btn btn-danger">Back to Buc Board</a>
-    </div>
+<div>
+    <a href="~/" class="btn btn-danger">Back to Buc Board</a>
+</div>
 
 
 
