@@ -3,11 +3,10 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<h2>Index</h2>
+<br /><br />
 <figure>
     <p>
-        <a asp-action="Create" class="btn btn-sm btn-info">Upload New</a>
+        <a asp-action="Create" class="btn btn-sm btn-danger">Upload New</a>
     </p>
     <figcaption>**Note: You may only have 1 profile picture at a time.<br />Delete Your old picture first, then upload a new one**</figcaption>
 </figure>
@@ -31,24 +30,25 @@
                 @Html.DisplayFor(modelItem => item.Picture) 
             </td>*@
             <td>
-                <img src="@ViewBag.DisplayImage" alt="Prof" style="width: 200px; height: 200px; margin: auto;"/>
+                <img src="@ViewBag.DisplayImage" alt="Prof" class="img-rounded" style="width: 200px; height: 200px; margin: auto;" /><br /><br />
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
             </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item.ApplicationUser.Id)
-            </td>*@
-            <td>
-                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
-                @*<a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
-                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
-                
             </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+            </td>*@
         </tr>
 }
     </tbody>
 
 </table>
 <div>
-    <a asp-action="Index" asp-controller="Home" class="btn btn-info">Back to Homepage</a>
+
+    <br /><br />
+    <a href="~/Manage/Splash" class="btn btn-danger">Back to toolbox</a>
 </div>
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using BucBoard.Models;
 
 namespace BucBoard.Models.Entities.Existing
 {
@@ -198,5 +199,7 @@ namespace BucBoard.Models.Entities.Existing
                     .HasConstraintName("FK_Time");
             });
         }
+
+        public DbSet<BucBoard.Models.ApplicationUser> ApplicationUser { get; set; }
     }
 }
