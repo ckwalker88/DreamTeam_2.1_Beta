@@ -46,7 +46,7 @@ namespace BucBoard.Controllers
         [TempData]
         public string StatusMessage { get; set; }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "SuperAdmin, Admin")]
         public ActionResult Splash()
         {
             return View();
