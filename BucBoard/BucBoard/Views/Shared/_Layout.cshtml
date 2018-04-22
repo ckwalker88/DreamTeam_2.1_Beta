@@ -38,10 +38,12 @@
 	</nav>
 	<div class="container body-content">
 		@RenderBody()
-		<hr />
-		<footer>
-			<p>&copy; 2018 - ETSU BucBoard</p><img src="~/images/logogold.png" alt="logo" height="45" />
-		</footer>
+		
+        <footer style="position: absolute; bottom: 0; width: 100%; height: 60px;">
+            <img src="~/images/logogold.png" alt="logo" height="45" />
+            <hr />
+            <p>&copy; 2018 - ETSU BucBoard</p>
+        </footer>
 	</div>
 
 	<environment include="Development">
