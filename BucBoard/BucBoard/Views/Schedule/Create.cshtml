@@ -2,11 +2,12 @@
 
 @{
     ViewData["Title"] = "Create";
+    Html.AntiForgeryToken();
 }
 
 <h2>Create</h2>
 
-<h4>ScheduleViewModel</h4>
+<h4>New Schedule Item</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -29,28 +30,37 @@
             </div>
             <div class="form-group">
                 <label asp-for="DayOfTheWeek1" class="control-label"></label>
-                <input asp-for="DayOfTheWeek1" class="form-control" />
+                <select class="form-control" id="DayOfTheWeek1" name="DayOfTheWeek1">
+                    <option value="M">Monday</option>
+                    <option value="T">Tuesday</option>
+                    <option value="W">Wednesday</option>
+                    <option value="TH">Thursday</option>
+                    <option value="F">Friday</option>
+                    <option value="MW">Monday/Wednesday</option>
+                    <option value="TTH">Tuesday/Thursday</option>
+                    <option value="MWF">Monday/Wednesday/Friday</option>
+                </select>
                 <span asp-validation-for="DayOfTheWeek1" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StartTime" class="control-label"></label>
-                <input asp-for="StartTime" class="form-control" />
+                <input asp-for="StartTime" class="form-control" type="time" />
                 <span asp-validation-for="StartTime" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="StopTime" class="control-label"></label>
-                <input asp-for="StopTime" class="form-control" />
+                <input asp-for="StopTime" class="form-control" type="time" />
                 <span asp-validation-for="StopTime" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Create" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Schedule" asp-action="Index" class="btn btn-info">Back to Manage Schedule Items</a>
 </div>
 
 @section Scripts {

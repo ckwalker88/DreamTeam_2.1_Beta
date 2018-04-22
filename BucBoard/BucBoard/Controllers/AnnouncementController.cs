@@ -44,16 +44,6 @@ namespace BucBoard.Controllers
             return View();
         }
 
-        public IActionResult Details(int id)
-        {
-            var announcement = _repo.ReadAnnouncement(id);
-            if (announcement == null)
-            {
-                return RedirectToAction("Index");
-            }
-            return View(announcement);
-        }
-
         public IActionResult Edit(int id)
         {
             var announcement = _repo.ReadAnnouncement(id);

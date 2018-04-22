@@ -8,7 +8,7 @@ namespace BucBoard.Services.Interfaces
         Course CreateCourse(Course course);
         Course ReadCourse(int id);
         ICollection<Course> ReadAllCourses();
-        void UpdateCourse(int id, Course course);
+        void UpdateCourse(Course course);
         void DeleteCourse(int id);
     }
 }

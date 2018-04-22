@@ -34,7 +34,7 @@ namespace BucBoard.Services
                 //.Include(r => r.ApplicationUser.Roles)
                 .ToList();
         }
-        public void UpdateCourse(int id, Course course)
+        public void UpdateCourse(Course course)
         {
             _db.Entry(course).State = EntityState.Modified;
             _db.SaveChanges();

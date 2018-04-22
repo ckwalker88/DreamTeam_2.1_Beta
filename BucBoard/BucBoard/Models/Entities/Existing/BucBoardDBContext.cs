@@ -21,10 +21,10 @@ namespace BucBoard.Models.Entities.Existing
         public virtual DbSet<Schedule> Schedule { get; set; }
         public virtual DbSet<Time> Time { get; set; }
 
-        public BucBoardDBContext(DbContextOptions<BucBoardDBContext> options)
-                    : base(options)
+        public BucBoardDBContext(DbContextOptions options) : base(options)
         {
         }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -180,8 +180,6 @@ namespace BucBoard.Models.Entities.Existing
 
             modelBuilder.Entity<Schedule>(entity =>
             {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
                 entity.Property(e => e.ApplicationUserId)
                     .IsRequired()
                     .HasMaxLength(450);

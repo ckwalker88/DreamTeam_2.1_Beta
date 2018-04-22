@@ -13,6 +13,7 @@ using System.Net.Mail;
 using System.Net;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using BucBoard.Models.ViewModels;
 
 namespace BucBoard.Controllers
 {
@@ -27,6 +28,7 @@ namespace BucBoard.Controllers
         private UserManager<ApplicationUser> _userManager;
         private IProfilePictureRepository _pic;
         private IAuthenticationRepository _user;
+        private IScheduleRepository _scheduleRepository;
 
         public HomeController(ICourseRepository courseRepository,
                               IDayOfTheWeekRepository dayOfTheWeekRepository,
@@ -34,7 +36,8 @@ namespace BucBoard.Controllers
                               IAnnouncementRepository announcementRepo,
                               UserManager<ApplicationUser> userManager,
                               IProfilePictureRepository pic,
-                              IAuthenticationRepository user)
+                              IAuthenticationRepository user,
+                              IScheduleRepository scheduleRepository)
         {
             _courseRepository = courseRepository;
             _dayOfTheWeekRepository = dayOfTheWeekRepository;
@@ -43,6 +46,7 @@ namespace BucBoard.Controllers
             _userManager = userManager;
             _pic = pic;
             _user = user;
+            _scheduleRepository = scheduleRepository;
            
         }
         public IActionResult Index()
@@ -112,8 +116,39 @@ namespace BucBoard.Controllers
                     ViewBag.DisplayName = profName;
 
             }
-                return View(model);
 
+            //from here down is the Schedule Model
+            var applicationUserId = _userManager.GetUserId(HttpContext.User);
+
+            var scheduleList = _scheduleRepository.ReadAllSchedules().Where(s => s.ApplicationUserId == applicationUserId);
+
+            ICollection<ScheduleViewModel> scheduleViewModelList = new List<ScheduleViewModel>();
+
+            Course course = new Course();
+            DayOfTheWeek dayOfTheWeek = new DayOfTheWeek();
+            Time time = new Time();
+
+            foreach (var schedule in scheduleList)
+            {
+                course = schedule.Course.FirstOrDefault(s => s.ScheduleId == schedule.Id);
+                dayOfTheWeek = schedule.DayOfTheWeek.FirstOrDefault(d => d.ScheduleId == schedule.Id);
+                time = schedule.Time.FirstOrDefault(t => t.ScheduleId == schedule.Id);
+
+                scheduleViewModelList.Add(new ScheduleViewModel
+                {
+                    CourseCode = course.CourseCode,
+                    CourseNumber = course.CourseNumber,
+                    CourseName = course.CourseName,
+                    DayOfTheWeek1 = dayOfTheWeek.DayOfTheWeek1,
+                    StartTime = time.StartTime,
+                    StopTime = time.StopTime,
+                    ScheduleId = schedule.Id
+                });
+            }
+            ViewBag.scheduleViewModelList = scheduleViewModelList;
+            //end of Schedule Model
+
+            return View(model);
         }
 
         /*

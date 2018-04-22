@@ -8,7 +8,7 @@ namespace BucBoard.Services.Interfaces
         DayOfTheWeek Create(DayOfTheWeek day);
         DayOfTheWeek Read(int id);
         ICollection<DayOfTheWeek> ReadAll();
-        void Update(int id, DayOfTheWeek day);
+        void Update(DayOfTheWeek day);
         void Delete(int id);
     }
 }

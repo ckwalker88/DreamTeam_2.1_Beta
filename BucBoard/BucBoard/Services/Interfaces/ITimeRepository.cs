@@ -8,7 +8,7 @@ namespace BucBoard.Services.Interfaces
 		Time CreateTime(Time time);
 		Time ReadTime(int id);
 		ICollection<Time> ReadAllTime();
-		void UpdateTime(int id, Time time);
+		void UpdateTime(Time time);
 		void DeleteTime(int id);
 	}
 }

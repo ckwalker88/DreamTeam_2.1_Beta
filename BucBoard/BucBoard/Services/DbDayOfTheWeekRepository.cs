@@ -42,7 +42,7 @@ namespace BucBoard.Services
                 .ToList();
         }
 
-        public void Update(int id, DayOfTheWeek day)
+        public void Update(DayOfTheWeek day)
         {
             _db.Entry(day).State = EntityState.Modified;
             _db.SaveChanges();

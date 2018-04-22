@@ -58,7 +58,7 @@ namespace BucBoard.Services
 			return _db.Time.FirstOrDefault(a => a.Id == id);
 		}
 
-		public void UpdateTime(int id, Time time)
+		public void UpdateTime(Time time)
 		{
 			_db.Entry(time).State = EntityState.Modified;
 			_db.SaveChanges();
