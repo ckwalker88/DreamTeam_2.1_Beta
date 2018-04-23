@@ -83,7 +83,7 @@
     
 
     <br />
-    
+    @*Create Schedule Table*@
     <div class="schedule" style="color:gold;">
         <h3 style="text-align:center; color:gold;"><u>Schedule</u></h3>
         <table class="table"style="margin:auto;">
@@ -95,9 +95,11 @@
                 </tr>
             </thead>
             <tbody>
+                @*Loop through each schedule item from the list of Schedule View Models that we passed in from the controller*@
                 @foreach (var schedule in ViewBag.scheduleViewModelList)
                 {
                     <tr>
+                        @*Display each schedule with it's elements in their respective columns*@
                         <td>@schedule.CourseCode @schedule.CourseNumber</td>
                         <td>@schedule.DayOfTheWeek1</td>
                         <td>@schedule.StartTime-@schedule.StopTime</td>
@@ -109,12 +111,14 @@
     </div>
 </div>
 
+@*Create Announcements section*@
 <div class="announcements" style="margin: auto; text-align: center;">
     <h1 style="color: gold;  outline: 0; display: inline-block; padding: 8px; color: gold; text-align: center; "><u>Announcements</u></h1><br /><br />
     <div style="text-align:center;">
+        @*Loop through each Announcement in the List of Announcements passed in from the controller*@
         @foreach (var item in Model)
         {
-            <h4><font color="gold" face="verdana">@item.Message</font></h4>
+            <h4><font color="gold" face="verdana">@item.Message@*Display each message*@</font></h4>
             <hr />
         }
     </div>

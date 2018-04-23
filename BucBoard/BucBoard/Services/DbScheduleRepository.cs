@@ -32,6 +32,7 @@ namespace BucBoard.Services
         public Schedule ReadSchedule(int id)
         {
             return _db.Schedule
+                //include the associated data from the Course, DayOfTheWeek, and Time tables
                 .Include(s => s.Course)
                 .Include(s => s.DayOfTheWeek)
                 .Include(s => s.Time)
@@ -41,6 +42,7 @@ namespace BucBoard.Services
         public ICollection<Schedule> ReadAllSchedules()
         {
             return _db.Schedule
+                //include the associated data from the Course, DayOfTheWeek, and Time tables
                 .Include(s => s.Course)
                 .Include(s => s.DayOfTheWeek)
                 .Include(s => s.Time)
