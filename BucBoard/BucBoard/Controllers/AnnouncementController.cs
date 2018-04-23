@@ -4,6 +4,7 @@ using BucBoard.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace BucBoard.Controllers
 {
@@ -23,8 +24,13 @@ namespace BucBoard.Controllers
 
         public IActionResult Index()
         {
-           
-            return View(_repo.ReadAllAnnouncements());
+            ViewBag.UserId = _userManager.GetUserId(HttpContext.User);
+
+            var msgs = _repo.ReadAllAnnouncements();
+            
+            var announcement = msgs.Where(p => p.ApplicationUserId == ViewBag.UserId).FirstOrDefault().Message;
+                
+            return View(_repo.ReadAllAnnouncements().Where(p => p.ApplicationUserId == ViewBag.UserId));
         }
 
         public IActionResult Create()

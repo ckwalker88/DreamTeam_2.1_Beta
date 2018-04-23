@@ -7,7 +7,7 @@
 <h2>Schedule Index</h2>
 
 <p>
-    <a asp-action="Create" class="btn btn-success">Create New</a>
+    <a asp-action="Create" class="btn btn-danger">Create New</a>
 </p>
 <table class="table">
     <thead>
@@ -56,11 +56,11 @@
                 @Html.DisplayFor(modelItem => item.StopTime)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ScheduleId" class="btn btn-warning">Edit</a> |
+                <a asp-action="Edit" asp-route-id="@item.ScheduleId" class="btn btn-danger">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@item.ScheduleId" class="btn btn-danger">Delete</a>
         </tr>
         }
     </tbody>
 </table>
 <a href="~/Manage/Splash" class="btn btn-danger">Back to toolbox</a>
-<a asp-controller="Home" asp-action="Index" class="btn btn-info">Back to Home Page</a>
+<a asp-controller="Home" asp-action="Index" class="btn btn-danger">Back to Home Page</a>
