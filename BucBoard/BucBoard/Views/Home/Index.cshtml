@@ -15,7 +15,7 @@
     <h3>Class and Office Hours</h3>
 </div>
 -->
-<style>
+@*<style>
     table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
@@ -23,7 +23,7 @@
     }
 
     td, th {
-        border: 1px solid #dddddd;
+        border: 1px solid #f9f9f9;
         text-align: left;
         padding: 8px;
         color: darkgrey;
@@ -33,7 +33,7 @@
         background-color: #dddddd;
     }
 
-</style>
+</style>*@
 <link rel="stylesheet" href="css/index.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -59,7 +59,12 @@
             <a style="text-decoration: none; font-size: 22px; color: black;" href="#"><i class="fa fa-twitter"></i></a>
             <a style="text-decoration: none; font-size: 22px; color: black;" href="#"><i class="fa fa-linkedin"></i></a>
             <a style="text-decoration: none; font-size: 22px; color: black;" href="#"><i class="fa fa-facebook"></i></a>*@
-        <p><button style="border: none; outline: 0; display: inline-block; padding: 8px; color: white; background-color: #000; text-align: center; cursor: pointer; width: 100%; font-size: 18px;" onMouseOver="this.style.color='gold'" onMouseOut="this.style.color='#FFF'" onclick="window.location.href='/Home/Email'">Contact</button></p>
+        <br /><br />
+        <div style="border:groove; border-color:gold;">
+            <p style="color:gold;">Contact</p>
+            <p><a href="~/Home/Email"><i class="fa fa-envelope" style="font-size:100px; color:gold;"></i></a></p>
+        </div>
+        <br />
     </div>
 
 </div>
@@ -75,17 +80,13 @@
     
 <div class="actionbuttons">
 
-    <h2 style="text-align:center; color:gold; border:groove;  ">Buc Board Toolbox</h2>        <!--This is the tool box icon hrefs and styling.-->
-    <div style="border-style:groove; border-width: 2px; border-color: #f9f9f9; padding:20px;">
-        <a href="~/Home/Email"><i class="fa fa-send-o" style="font-size:128px; color:#f9f9f9"></i></a> <!-- Email icon button-->
-        <i class="fa fa-calendar" style="font-size:128px; color:#f9f9f9"></i><!--Calendar icon button-->
-    </div>
+    
 
     <br />
     
-    <div class="schedule">
-        <h3 style="text-align:center; color:gold; border:groove; ">Schedule</h3>
-        <table style="margin:auto;">
+    <div class="schedule" style="color:gold;">
+        <h3 style="text-align:center; color:gold;"><u>Schedule</u></h3>
+        <table class="table"style="margin:auto;">
             <thead>
                 <tr>
                     <th>Event</th>
@@ -108,12 +109,12 @@
     </div>
 </div>
 
-<div class="announcements" style="  margin: auto; text-align: center;">
-    <h1 style="color: gold;  outline: 0; display: inline-block; padding: 8px; color: gold; text-align: center; ">Announcements</h1>
+<div class="announcements" style="margin: auto; text-align: center;">
+    <h1 style="color: gold;  outline: 0; display: inline-block; padding: 8px; color: gold; text-align: center; "><u>Announcements</u></h1><br /><br />
     <div style="text-align:center;">
         @foreach (var item in Model)
         {
-            <h4><font color="#00bfff" face="verdana">@item.Message</font></h4>
+            <h4><font color="gold" face="verdana">@item.Message</font></h4>
             <hr />
         }
     </div>
